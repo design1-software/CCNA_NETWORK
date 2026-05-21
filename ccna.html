@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF + 5 REST API queries live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -257,10 +257,10 @@
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 2 — Network Access (20% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">90%</span>
+      <span class="domain-pct" style="color:var(--green)">93%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:90%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:93%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -271,12 +271,26 @@
         <div class="item-good">5 SSIDs mapped to 5 VLANs on UniFi</div>
         <div class="item-good">WiFi 6 APs — WPA2/WPA3 capable</div>
         <div class="item-good">PoE+ 802.3af/at — live devices depend on it</div>
+        <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026:
+             STP moved from "Gaps to fill" to "Lab covers."
+             JLM-LAB-SW1 (3560CX) is configured: Rapid-PVST+ mode, Extended
+             system ID enabled, Bridge Assurance enabled. No instances are
+             active — correct behavior when there are no redundant L2 paths.
+             STP is loop prevention. No redundant paths = nothing to block.
+             The C1111 is a Layer 3 router — STP is a Layer 2 protocol and
+             does not run on routed interfaces. Both behaviors are expected
+             and confirm the topology is correct. -->
+        <div class="item-good">Rapid-PVST+ on JLM-LAB-SW1 — Extended system ID + Bridge Assurance configured</div>
+        <div class="item-good">STP loop prevention — no instances without redundant L2 paths (correct behavior)</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <div class="item-gap">STP — no evidence of observation/config in README</div>
-        <div class="item-gap">EtherChannel — 3560CX cutover creates this opportunity</div>
-        <div class="item-gap">RSTP/PVST+ — document STP topology once 3560CX is live</div>
+        <!-- 📘 One gap remains in Domain 2: EtherChannel.
+             The 3560CX cutover creates the physical opportunity — once
+             cabled with redundant uplinks, LACP or PAgP can bundle them.
+             That's both an EtherChannel lab and an STP topology change
+             in one step: add cables, watch instances appear. -->
+        <div class="item-gap">EtherChannel — redundant uplinks to 3560CX create this opportunity</div>
       </div>
     </div>
   </div><!-- end Domain 2 -->
