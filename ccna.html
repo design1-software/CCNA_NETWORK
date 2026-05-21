@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko automation configured</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF + 5 REST API queries live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">83%</div>
+    <div class="verdict-score">86%</div>
     <div class="verdict-label">
-      <strong>5 of 5 original action items closed. Ansible project built, Netmiko backup running, NTP hierarchy live.</strong><br>
-      Remaining focus: RESTCONF/REST API (Domain 6), OSPFv3, AAA/RADIUS, IP Source Guard, and Syslog.
+      <strong>Every original critical miss is closed. RESTCONF live — 5 REST API queries returning structured JSON from JLM-LAB-R1.</strong><br>
+      Remaining gaps are amber: OSPFv3, AAA/RADIUS, IP Source Guard, Syslog, and AI/ML in network ops. No blind spots remain.
     </div>
   </div>
 
@@ -401,22 +401,23 @@
        Common entities: &amp; = &    &lt; = <    &gt; = >    &nbsp; = non-breaking space
        🔗 https://www.w3schools.com/html/html_entities.asp
 
-       📘 LIVING DOCUMENT UPDATE — May 21, 2026:
-       Domain 6 moved from 35% (red) to 58% (amber). Ansible project was built
-       in full but failed at runtime due to a 3-layer SSH KEX incompatibility:
-       IOS XE 16.10 only offers legacy SHA-1 KEX, network_cli ignores all
-       ssh_args overrides (documented bug: cisco.ios #1133), and ansible-pylibssh
-       crashes on Apple Silicon ARM. Solution: Netmiko, which configures paramiko
-       directly at the Python level and bypasses all three layers.
-       The failure produced more CCNA-relevant knowledge than a clean success would.
-       REST API (RESTCONF) and NETCONF remain as critical gaps. -->
+       📘 LIVING DOCUMENT UPDATE — May 21, 2026 (second pass):
+       Domain 6 moved from 58% (amber) to 82% (green). RESTCONF enabled on C1111.
+       5 REST API GET queries executed via Python requests library against live router:
+         1. Hostname    2. IOS version    3. Interface table (JSON parsed)
+         4. OSPF process 1 — all 9 configured networks readable via API
+         5. NTP servers and master stratum — the hierarchy built earlier, machine-readable
+       Every CCNA Domain 6 REST API topic now covered: HTTP GET, JSON parsing,
+       YANG model paths, programmatic device access. AI/ML remains as amber gap.
+       This is the power of a living document — the class on .item-miss changes
+       to .item-good and the CSS ::before handles the rest. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 6 — Automation &amp; Programmability (10% of exam)</span>
-      <span class="domain-pct" style="color:var(--amber)">58%</span>
+      <span class="domain-pct" style="color:var(--green)">82%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:58%;background:var(--amber)"></div>
+      <div class="bar-fill" style="width:82%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -427,17 +428,18 @@
         <div class="item-good">Netmiko — working backup script, connects to C1111, timestamped output</div>
         <div class="item-good">JSON/YAML — YAML inventory, vault.yml, playbook files all working</div>
         <div class="item-good">SSH KEX — documented legacy IOS vs modern SSH incompatibility</div>
-        <div class="item-good">Tool selection — Ansible vs Netmiko decision with root cause analysis</div>
+        <div class="item-good">RESTCONF — enabled on C1111, IOS XE YANG model paths confirmed</div>
+        <div class="item-good">REST API — 5 GET queries: hostname, version, interfaces, OSPF, NTP</div>
+        <div class="item-good">JSON parsing — interface table, OSPF networks, NTP config from API responses</div>
+        <div class="item-good">HTTP GET method — demonstrated across all 5 resource queries</div>
       </div>
       <div class="col">
-        <div class="col-label" style="color:var(--red)">Critical gaps</div>
-        <!-- 📘 Two .item-miss items remain — REST API and NETCONF/RESTCONF.
-             These are the last two critical gaps in the entire assessment.
-             Note the color signal: .item-miss (✗ red) vs .item-gap (→ amber).
-             The distinction matters — these are genuinely unstarted, not
-             partially addressed. Accurate class names = accurate data. -->
-        <div class="item-miss">REST API calls via RESTCONF — not yet configured on C1111</div>
-        <div class="item-miss">NETCONF / RESTCONF on C1111 — IOS XE supports it, not yet enabled</div>
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <!-- 📘 No more .item-miss in this domain — all critical gaps are closed.
+             The remaining item is amber (.item-gap) — a real gap, but not a
+             blind spot. This is what "no critical misses remain" looks like
+             in code: the right column drops from red to amber, and every
+             item uses → instead of ✗. Color and symbol do the communicating. -->
         <div class="item-gap">AI/ML in network ops — gen AI for anomaly detection (v1.1 topic)</div>
       </div>
     </div>
@@ -490,10 +492,10 @@
   </div>
 
   <div class="gap-card">
-    <div class="gap-title">4. Enable RESTCONF on C1111 and make one Python API call</div>
-    <div class="gap-body">IOS XE supports RESTCONF natively. Enable it (restconf, ip http secure-server), then use Python requests to GET your interface list as JSON. This one task teaches REST API, HTTP methods, JSON parsing, and IOS XE programmability simultaneously — all v1.1 exam topics. One afternoon.</div>
-    <span class="tag tag-hard">High priority</span>
-    <span class="tag tag-add">New v1.1 content</span>
+    <div class="gap-title">4. ✓ RESTCONF + REST API — closed May 21, 2026</div>
+    <div class="gap-body">RESTCONF enabled on C1111. Five GET queries executed via Python requests library against live router: hostname, IOS version, full interface table (JSON parsed with VLAN + IP details), OSPF process 1 (all 9 configured networks readable via API), NTP servers and master stratum. HTTP GET method, YANG model paths, and JSON parsing all demonstrated against production hardware. Four of six CCNA domains confirmed readable programmatically — routing, interfaces, services, and platform data.</div>
+    <span class="tag tag-done">Closed</span>
+    <span class="tag tag-done">5 queries · live JSON</span>
   </div>
 
   <div class="gap-card">
