@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · May 2026</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2 + IPv6 configured</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">74%</div>
+    <div class="verdict-score">79%</div>
     <div class="verdict-label">
-      <strong>Lab is strong — real hardware is your biggest advantage.</strong><br>
-      You have a Cisco C1111 running IOS XE in production. Most CCNA candidates practice in Packet Tracer simulators. Your gaps are specific and fillable — primarily OSPFv2, IPv6, automation/REST API, and a few Layer 2 security features.
+      <strong>OSPFv2 and IPv6 dual-stack are now live on JLM-LAB-R1.</strong><br>
+      Two of the top 5 gaps closed in one session. Remaining focus: automation/REST API (Domain 6), OSPFv3, and Layer 2 security features (DHCP snooping, DAI). Real hardware, real progress.
     </div>
   </div>
 
@@ -193,7 +193,7 @@
            flows into position. Either span or div works in a flex container,
            but span is semantically cleaner for inline text pieces. -->
       <span class="domain-name">Domain 1 — Network Fundamentals (20% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">85%</span>
+      <span class="domain-pct" style="color:var(--green)">92%</span>
       <!-- 📘 INLINE STYLE with a CSS variable: style="color:var(--green)"
            Yes — CSS variables work in inline styles. The browser resolves
            var(--green) against the :root definition at render time.
@@ -205,12 +205,12 @@
 
     <!-- 📘 PROGRESS BAR — two nested divs.
          .bar-bg is the full-width gray track. .bar-fill is the colored
-         inner fill. Its width% is this domain's score: 85%.
+         inner fill. Its width% is this domain's score: 92%.
          Its background color matches the score color: green.
          overflow:hidden on .bar-bg clips the fill at the rounded edges.
          See style.css section 10 for the full explanation. -->
     <div class="bar-bg">
-      <div class="bar-fill" style="width:85%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:92%;background:var(--green)"></div>
     </div>
 
     <!-- 📘 CSS GRID: .row creates a 2-column layout.
@@ -236,12 +236,12 @@
         <div class="item-good">Dual managed switch topology (GS308EP + GS316EP)</div>
         <div class="item-good">PoE+ power budgeting — 180W real constraint</div>
         <div class="item-good">Xfinity bridge mode — you own the routing layer</div>
+        <div class="item-good">IPv6 dual-stack — Vlan10 2001:DB8:10::1/64, Vlan20 2001:DB8:20::1/64</div>
       </div>
 
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
         <!-- 📘 .item-gap — the → arrow is injected by CSS ::before, amber color. -->
-        <div class="item-gap">IPv6 — zero IPv6 in current setup</div>
         <div class="item-gap">GS316EP has SFP port — document/use it</div>
         <div class="item-gap">Add physical cabling diagram to GitHub repo</div>
       </div>
@@ -283,17 +283,18 @@
 
 
   <!-- DOMAIN 3 — IP Connectivity / Routing ───────────────────────────── -->
-  <!-- 📘 NOTE THE COLOR SHIFT: score is amber (58%), bar is amber, label says
-       "Critical gaps" in red with .item-miss elements. The visual language
-       communicates urgency — the user reads meaning from color before reading
-       a single word. That's intentional, data-driven design. -->
+  <!-- 📘 COLOR SHIFT UPDATE: score moved from 58% (amber) to 72% (still amber).
+       OSPFv2 — the heaviest gap — is now closed. IPv6 addressing is live.
+       Remaining gaps: OSPFv3 (IPv6 routing protocol) and HSRP/FHRP.
+       The bar stays amber because 72% is improved but not yet strong.
+       Color communicates progress without a single word of explanation. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 3 — IP Connectivity / Routing (25% of exam)</span>
-      <span class="domain-pct" style="color:var(--amber)">58%</span>
+      <span class="domain-pct" style="color:var(--amber)">72%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:58%;background:var(--amber)"></div>
+      <div class="bar-fill" style="width:72%;background:var(--amber)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -302,17 +303,19 @@
         <div class="item-good">NAT/PAT — Xfinity bridge → C1111 → all VLANs</div>
         <div class="item-good">Static routes implied by multi-VLAN topology</div>
         <div class="item-good">Default route 0.0.0.0/0 to Comcast</div>
+        <div class="item-good">OSPFv2 — process 1, router-id 10.0.0.1, 9 networks in area 0</div>
+        <div class="item-good">IPv6 unicast-routing enabled — dual-stack on Vlan10 + Vlan20</div>
       </div>
       <div class="col">
-        <div class="col-label" style="color:var(--red)">Critical gaps</div>
-        <!-- 📘 .item-miss — the ✗ is injected by CSS ::before, red color.
-             Used here instead of .item-gap because these are CRITICAL gaps —
-             the class name changes to signal severity. Same HTML element,
-             different class, different symbol and color. -->
-        <div class="item-miss">OSPFv2 — not configured anywhere in lab (exam weight: heavy)</div>
-        <div class="item-miss">IPv6 routing (OSPFv3) — zero presence</div>
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <!-- 📘 CLASS CHANGE: these were .item-miss (✗ red) in the original.
+             Now that the critical OSPFv2 gap is closed, remaining items are
+             gaps-to-fill, not critical misses. Changing to .item-gap (→ amber)
+             accurately reflects the current state. The HTML class name IS
+             the data — it drives the symbol and color via CSS ::before. -->
+        <div class="item-gap">OSPFv3 — IPv6 addresses configured, routing protocol not yet started</div>
         <div class="item-gap">HSRP / FHRP — needs 2 L3 devices (3560CX opportunity)</div>
-        <div class="item-gap">show ip route, show ip ospf neighbor — practice these daily</div>
+        <div class="item-gap">show ip ospf neighbor — run regularly as 3560CX comes online</div>
       </div>
     </div>
   </div><!-- end Domain 3 -->
@@ -433,22 +436,22 @@
        cognitive load (the reader doesn't have to re-learn the layout). -->
 
   <div class="gap-card">
-    <div class="gap-title">1. Configure OSPFv2 on C1111 — this is the #1 gap</div>
-    <div class="gap-body">OSPF is the heaviest topic in Domain 3 (25% of exam). Your lab has static routes but zero dynamic routing. Add a loopback interface on C1111, configure OSPF process 1, advertise your VLAN subnets. When 3560CX goes live as L3 core, run OSPF between them. This single task closes your biggest weakness.</div>
+    <div class="gap-title">1. ✓ OSPFv2 configured on C1111 — closed May 21, 2026</div>
+    <div class="gap-body">Loopback0 created (10.0.0.1/32), router-id set, 9 networks advertised into area 0 (VLANs 10/20/30/31/40/50/99/100 + loopback). passive-interface default with no passive-interface Loopback0. Verified with show ip ospf interface brief — 9 interfaces active. Next: bring 3560CX online as a second L3 device and establish an OSPF neighbor relationship.</div>
     <!-- 📘 TAG STACKING: class="tag tag-hard" applies TWO classes at once.
          .tag supplies the base styles (font, padding, border-radius, display).
          .tag-hard supplies the unique color. This is the BASE + MODIFIER pattern.
          You can stack as many classes as needed — they all apply simultaneously.
          🔗 https://www.w3schools.com/css/css_selectors.asp -->
-    <span class="tag tag-hard">High priority</span>
-    <span class="tag tag-done">C1111 supports it natively</span>
+    <span class="tag tag-done">Closed</span>
+    <span class="tag tag-done">write memory confirmed</span>
   </div>
 
   <div class="gap-card">
-    <div class="gap-title">2. Add IPv6 to at least 2 VLAN interfaces</div>
-    <div class="gap-body">IPv6 is expanded in v1.1. Configure dual-stack on VLAN 10 and VLAN 20 SVIs on C1111. Run show ipv6 interface brief. Takes 30 minutes and closes a real exam gap that most home lab people skip.</div>
-    <span class="tag tag-hard">Medium priority</span>
-    <span class="tag tag-done">C1111 IOS XE supports dual-stack</span>
+    <div class="gap-title">2. ✓ IPv6 dual-stack on Vlan10 + Vlan20 — closed May 21, 2026</div>
+    <div class="gap-body">ipv6 unicast-routing enabled globally. Vlan10: 2001:DB8:10::1/64. Vlan20: 2001:DB8:20::1/64. Loopback0: 2001:DB8::1/128. Verified with show ipv6 route — 6 entries (C/L on both VLANs and loopback). Next: configure OSPFv3 process to advertise these prefixes dynamically.</div>
+    <span class="tag tag-done">Closed</span>
+    <span class="tag tag-add">OSPFv3 still needed</span>
   </div>
 
   <div class="gap-card">
