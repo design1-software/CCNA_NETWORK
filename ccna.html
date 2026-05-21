@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">86%</div>
+    <div class="verdict-score">89%</div>
     <div class="verdict-label">
-      <strong>Every original critical miss is closed. RESTCONF live — 5 REST API queries returning structured JSON from JLM-LAB-R1.</strong><br>
-      Remaining gaps are amber: OSPFv3, AAA/RADIUS, IP Source Guard, Syslog, and AI/ML in network ops. No blind spots remain.
+      <strong>OSPFv3 running. Every routing protocol on the exam now covered in the lab.</strong><br>
+      Remaining gaps are amber: HSRP/FHRP, EtherChannel, AAA/RADIUS, IP Source Guard, Syslog, and AI/ML in network ops.
     </div>
   </div>
 
@@ -297,18 +297,22 @@
 
 
   <!-- DOMAIN 3 — IP Connectivity / Routing ───────────────────────────── -->
-  <!-- 📘 COLOR SHIFT UPDATE: score moved from 58% (amber) to 72% (still amber).
-       OSPFv2 — the heaviest gap — is now closed. IPv6 addressing is live.
-       Remaining gaps: OSPFv3 (IPv6 routing protocol) and HSRP/FHRP.
-       The bar stays amber because 72% is improved but not yet strong.
-       Color communicates progress without a single word of explanation. -->
+  <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026 (third pass):
+       OSPFv3 is now running. Score moves 72% → 82%, color shifts amber → green.
+       OSPFv3 output confirmed: Lo0 in LOOP state (stable router-ID anchor),
+       Vlan10 and Vlan20 both DR with no neighbors — correct for a single router.
+       Area 0 backbone inactive with no neighbors — also correct. No OSPFv3
+       routes in the table because there's nothing else to learn from. Every
+       behavior is expected. The protocol is configured and running — the exam
+       cares that you can configure it, not that you have a full mesh.
+       Only remaining gap: HSRP / FHRP — needs a second L3 device. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 3 — IP Connectivity / Routing (25% of exam)</span>
-      <span class="domain-pct" style="color:var(--amber)">72%</span>
+      <span class="domain-pct" style="color:var(--green)">82%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:72%;background:var(--amber)"></div>
+      <div class="bar-fill" style="width:82%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -319,17 +323,20 @@
         <div class="item-good">Default route 0.0.0.0/0 to Comcast</div>
         <div class="item-good">OSPFv2 — process 1, router-id 10.0.0.1, 9 networks in area 0</div>
         <div class="item-good">IPv6 unicast-routing enabled — dual-stack on Vlan10 + Vlan20</div>
+        <!-- 📘 LIVING DOCUMENT UPDATE — OSPFv3 moved from gap to covered.
+             The CSS class .item-good and .item-gap differ only in class name —
+             but that name change flips the ::before symbol from → (amber) to
+             ✓ (green). One attribute change, instant visual communication.
+             This is why accurate class names matter: they ARE the data. -->
+        <div class="item-good">OSPFv3 — running on Lo0, Vlan10, Vlan20 · DR state · Area 0 configured</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <!-- 📘 CLASS CHANGE: these were .item-miss (✗ red) in the original.
-             Now that the critical OSPFv2 gap is closed, remaining items are
-             gaps-to-fill, not critical misses. Changing to .item-gap (→ amber)
-             accurately reflects the current state. The HTML class name IS
-             the data — it drives the symbol and color via CSS ::before. -->
-        <div class="item-gap">OSPFv3 — IPv6 addresses configured, routing protocol not yet started</div>
+        <!-- 📘 One gap remains in Domain 3.
+             HSRP requires two Layer 3 devices to elect a virtual gateway.
+             The 3560CX (JLM-LAB-SW1) creates that opportunity once its
+             Layer 3 SVIs are configured. Two devices + shared VLAN = HSRP lab. -->
         <div class="item-gap">HSRP / FHRP — needs 2 L3 devices (3560CX opportunity)</div>
-        <div class="item-gap">show ip ospf neighbor — run regularly as 3560CX comes online</div>
       </div>
     </div>
   </div><!-- end Domain 3 -->
@@ -492,10 +499,10 @@
   </div>
 
   <div class="gap-card">
-    <div class="gap-title">2. ✓ IPv6 dual-stack on Vlan10 + Vlan20 — closed May 21, 2026</div>
-    <div class="gap-body">ipv6 unicast-routing enabled globally. Vlan10: 2001:DB8:10::1/64. Vlan20: 2001:DB8:20::1/64. Loopback0: 2001:DB8::1/128. Verified with show ipv6 route — 6 entries (C/L on both VLANs and loopback). Next: configure OSPFv3 process to advertise these prefixes dynamically.</div>
+    <div class="gap-title">2. ✓ IPv6 dual-stack + OSPFv3 — closed May 21, 2026</div>
+    <div class="gap-body">ipv6 unicast-routing enabled globally. Vlan10: 2001:DB8:10::1/64. Vlan20: 2001:DB8:20::1/64. Loopback0: 2001:DB8::1/128. Verified with show ipv6 route — 6 entries (C/L on both VLANs and loopback). OSPFv3 process running: Lo0 in LOOP state (router-ID anchor), Vlan10 + Vlan20 in DR state with no neighbors — correct for single-router topology. Area 0 backbone inactive. No OSPFv3 routes — nothing to learn from in a single-router lab. Protocol configured and running.</div>
     <span class="tag tag-done">Closed</span>
-    <span class="tag tag-add">OSPFv3 still needed</span>
+    <span class="tag tag-done">OSPFv3 running</span>
   </div>
 
   <div class="gap-card">
