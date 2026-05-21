@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI configured</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko automation configured</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">81%</div>
+    <div class="verdict-score">83%</div>
     <div class="verdict-label">
-      <strong>4 of 5 original action items closed — OSPFv2, IPv6, DHCP snooping, and DAI all live.</strong><br>
-      JLM-LAB-SW1 (WS-C3560CX-8PC-S) is active. Remaining focus: automation/REST API (Domain 6), OSPFv3, AAA/RADIUS, and IP Source Guard.
+      <strong>5 of 5 original action items closed. Ansible project built, Netmiko backup running, NTP hierarchy live.</strong><br>
+      Remaining focus: RESTCONF/REST API (Domain 6), OSPFv3, AAA/RADIUS, IP Source Guard, and Syslog.
     </div>
   </div>
 
@@ -322,13 +322,19 @@
 
 
   <!-- DOMAIN 4 — IP Services ─────────────────────────────────────────── -->
+  <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026:
+       NTP moved from .item-gap to .item-good after a full 3-tier hierarchy
+       was configured and verified across all four lab devices.
+       SNMP text updated — config was already on the router, Pi integration pending.
+       This is a good example of a gap that was partially closed before it was
+       documented. The report reflects actual state, not aspirational state. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 4 — IP Services (10% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">88%</span>
+      <span class="domain-pct" style="color:var(--green)">93%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:88%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:93%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -338,11 +344,12 @@
         <div class="item-good">NAT/PAT — live, verified, production traffic</div>
         <div class="item-good">TCP MSS clamping — ip tcp adjust-mss 1380 (advanced)</div>
         <div class="item-good">SSH — C1111 SSHv2, hardened, local auth</div>
+        <div class="item-good">NTP — C1111 stratum 2 (Google), SW1 + Pi + Acer stratum 3 via C1111</div>
+        <div class="item-good">SNMP — community closet-ro RO, location + contact set on C1111</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <div class="item-gap">NTP — configure C1111 explicitly as NTP server, document it</div>
-        <div class="item-gap">SNMP — not in README; add to Pi monitoring stack</div>
+        <div class="item-gap">SNMP Pi integration — router configured, polling from Pi stack not yet confirmed</div>
         <div class="item-gap">Syslog — mentioned in security but not configured as exam scenario</div>
       </div>
     </div>
@@ -392,31 +399,45 @@
        directly can confuse the HTML parser. &amp; is the correct, safe way
        to display a literal ampersand character in HTML.
        Common entities: &amp; = &    &lt; = <    &gt; = >    &nbsp; = non-breaking space
-       🔗 https://www.w3schools.com/html/html_entities.asp -->
+       🔗 https://www.w3schools.com/html/html_entities.asp
+
+       📘 LIVING DOCUMENT UPDATE — May 21, 2026:
+       Domain 6 moved from 35% (red) to 58% (amber). Ansible project was built
+       in full but failed at runtime due to a 3-layer SSH KEX incompatibility:
+       IOS XE 16.10 only offers legacy SHA-1 KEX, network_cli ignores all
+       ssh_args overrides (documented bug: cisco.ios #1133), and ansible-pylibssh
+       crashes on Apple Silicon ARM. Solution: Netmiko, which configures paramiko
+       directly at the Python level and bypasses all three layers.
+       The failure produced more CCNA-relevant knowledge than a clean success would.
+       REST API (RESTCONF) and NETCONF remain as critical gaps. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 6 — Automation &amp; Programmability (10% of exam)</span>
-      <!-- 📘 35% = red score. Red border on the progress bar. Red "Critical gaps"
-           label. All three color signals fire together — strong visual warning
-           without a single word of emphasis needed. -->
-      <span class="domain-pct" style="color:var(--red)">35%</span>
+      <span class="domain-pct" style="color:var(--amber)">58%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:35%;background:var(--red)"></div>
+      <div class="bar-fill" style="width:58%;background:var(--amber)"></div>
     </div>
     <div class="row">
       <div class="col">
         <div class="col-label" style="color:var(--green)">Lab covers</div>
         <div class="item-good">Docker Compose — IaC thinking applied to services</div>
         <div class="item-good">Python — closet-monitor + 78K lines of code</div>
-        <div class="item-good">Ansible planned (Phase 7) — start it early</div>
+        <div class="item-good">Ansible architecture — full project: inventory, vault, playbook, cfg</div>
+        <div class="item-good">Netmiko — working backup script, connects to C1111, timestamped output</div>
+        <div class="item-good">JSON/YAML — YAML inventory, vault.yml, playbook files all working</div>
+        <div class="item-good">SSH KEX — documented legacy IOS vs modern SSH incompatibility</div>
+        <div class="item-good">Tool selection — Ansible vs Netmiko decision with root cause analysis</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--red)">Critical gaps</div>
-        <div class="item-miss">REST API calls to network device — never done</div>
-        <div class="item-miss">Ansible network playbooks — planned but not started</div>
-        <div class="item-miss">JSON/YAML parsing of IOS XE output</div>
-        <div class="item-miss">NETCONF / RESTCONF on C1111 (IOS XE supports it)</div>
+        <!-- 📘 Two .item-miss items remain — REST API and NETCONF/RESTCONF.
+             These are the last two critical gaps in the entire assessment.
+             Note the color signal: .item-miss (✗ red) vs .item-gap (→ amber).
+             The distinction matters — these are genuinely unstarted, not
+             partially addressed. Accurate class names = accurate data. -->
+        <div class="item-miss">REST API calls via RESTCONF — not yet configured on C1111</div>
+        <div class="item-miss">NETCONF / RESTCONF on C1111 — IOS XE supports it, not yet enabled</div>
         <div class="item-gap">AI/ML in network ops — gen AI for anomaly detection (v1.1 topic)</div>
       </div>
     </div>
@@ -462,9 +483,9 @@
   </div>
 
   <div class="gap-card">
-    <div class="gap-title">3. Pull Ansible forward — don't wait for Phase 7</div>
-    <div class="gap-body">Automation is 10% of the exam and the fastest-growing section. Write one playbook that backs up your C1111 running config using the cisco.ios.ios_config module. You already have Python skills and Docker. Ansible is a one-afternoon setup, and it feeds Phase 7 directly.</div>
-    <span class="tag tag-hard">High priority</span>
+    <div class="gap-title">3. ✓ Ansible/Netmiko automation — closed May 21, 2026 (completed differently)</div>
+    <div class="gap-body">Ansible project built in full (inventory, vault, playbook, cfg, cisco.ios collection). Playbook blocked at runtime by 3-layer SSH KEX incompatibility: IOS XE 16.10 legacy SHA-1 KEX, network_cli ignoring all ssh_args overrides (cisco.ios bug #1133), and ansible-pylibssh crashing on Apple Silicon. Solution: Netmiko backup script — connects to C1111, runs show running-config, saves timestamped output to backups/. The failure documented more real-world automation knowledge than a clean playbook run would have. Next: RESTCONF on C1111 for the REST API gap.</div>
+    <span class="tag tag-done">Closed</span>
     <span class="tag tag-add">Pulls Phase 7 forward</span>
   </div>
 
