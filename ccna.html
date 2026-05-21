@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!-- 📘 DOCTYPE — required as the very first line of every HTML5 document.
+     It is NOT a tag — it's a declaration that tells the browser:
+     "render this page using modern HTML5 rules, not legacy quirks mode."
+     Without it, browsers may render your page incorrectly.
+     🔗 https://www.w3schools.com/tags/tag_doctype.asp -->
+
+<html lang="en">
+<!-- 📘 <html> is the ROOT ELEMENT — every other element on the page lives
+     inside it. There is only ever one <html> element per page.
+     lang="en" tells browsers, screen readers, and search engines that
+     this page's content is in English. This matters for accessibility —
+     screen readers use it to choose the correct pronunciation engine.
+     🔗 https://www.w3schools.com/html/html_intro.asp -->
+
+<head>
+  <!-- 📘 <head> holds information ABOUT the page — none of it is visible
+       to the user. It contains metadata, links to stylesheets, the page title,
+       and instructions for the browser. Think of it as the page's settings panel.
+       🔗 https://www.w3schools.com/html/html_head.asp -->
+
+  <meta charset="UTF-8">
+  <!-- 📘 <meta> tags provide metadata — data about the page, not content on it.
+       charset="UTF-8" tells the browser how to decode text characters.
+       UTF-8 supports virtually every character in every language, plus
+       symbols like ⚠ → ✓ ✗. Always include this line — without it,
+       special characters may appear as garbled boxes or question marks.
+       🔗 https://www.w3schools.com/html/html_charset.asp -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 📘 The viewport meta tag is required for responsive design.
+       WITHOUT IT: phones render the page as if it were a desktop screen
+                   (usually ~980px wide) and then zoom out to fit. Everything
+                   becomes tiny and illegible.
+       WITH IT:    width=device-width sets the layout width to the actual
+                   device screen width. initial-scale=1.0 sets zoom to 100%.
+       One line of HTML makes the difference between a readable mobile page
+       and an unusable one.
+       🔗 https://www.w3schools.com/css/css_rwd_viewport.asp -->
+
+  <title>CCNA Readiness — Domain-Driven Portfolio</title>
+  <!-- 📘 <title> sets the text shown on the browser tab and in search engine
+       results. Every page needs a unique, descriptive title.
+       This is one of the most important on-page SEO elements.
+       Keep it under 60 characters so it doesn't get truncated in search results.
+       🔗 https://www.w3schools.com/tags/tag_title.asp -->
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 📘 <link> connects an external resource to this HTML page.
+       rel="stylesheet" declares the relationship — this is a stylesheet.
+       href="css/style.css" is the file path — RELATIVE to this HTML file.
+       Relative paths: no http://, no domain — just the folder/file location
+       from where THIS file sits. css/style.css means: look in the css/ folder,
+       open style.css.
+
+       WHY AN EXTERNAL FILE instead of a <style> block inside the HTML?
+       Because index.html, data.html, and swe.html ALL link to the same file.
+       One change in style.css updates every page simultaneously. That is the
+       core benefit of separating structure (HTML) from presentation (CSS).
+       🔗 https://www.w3schools.com/css/css_howto.asp -->
+
+</head>
+
+<body>
+<!-- 📘 Everything inside <body> is what the user sees and interacts with.
+     The browser renders this content from top to bottom, left to right,
+     in the order it appears in the file. Sequence in HTML = visual order. -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════════════════
+       📘 <nav> is a SEMANTIC HTML5 element — it identifies a block of
+       navigation links. Using semantic elements instead of generic <div>s
+       communicates the PAGE STRUCTURE to browsers and screen readers.
+       A screen reader knows to announce "navigation region" when it hits a
+       <nav>, helping visually impaired users jump directly to it.
+       Other semantic elements: <header>, <main>, <section>, <footer>, <article>
+       🔗 https://www.w3schools.com/html/html5_semantic_elements.asp       -->
+  <nav class="nav">
+    <a href="index.html">← Domain-Driven Portfolio</a>
+    <!-- 📘 <a> (anchor) creates a hyperlink. It is the fundamental building
+         block of the web — the thing that connects pages to each other.
+         href="index.html" is a relative path to the hub page.
+         The ← character is a Unicode left arrow — typed directly, no entity needed.
+         🔗 https://www.w3schools.com/html/html_links.asp -->
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       PAGE HEADER
+       ═══════════════════════════════════════════════════════════════════ -->
+
+  <h1>CCNA 200-301 v1.1 — <span>Lab Readiness Report</span></h1>
+  <!-- 📘 <h1> — the primary heading. Every page must have exactly ONE h1.
+       It defines the main topic of the page for search engines and
+       screen readers. Think of it as the page's "title" in the document
+       outline, not just visually large text.
+
+       <span> inside h1 — a <span> is a generic INLINE container.
+       Unlike block elements (<div>, <p>), it doesn't start a new line.
+       Here it wraps part of the heading text so CSS can color it green.
+       The <span> itself has zero visual effect — the class does the work.
+       🔗 https://www.w3schools.com/tags/tag_span.asp -->
+
+  <p class="subtitle">// Assessed from git-init-home-lab README · May 2026</p>
+  <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
+       bottom spacing. class="subtitle" connects it to the .subtitle rule in
+       style.css, which applies the monospace font and muted color.
+       The // prefix mimics a code comment — pure style choice, not syntax.
+       🔗 https://www.w3schools.com/html/html_paragraphs.asp -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       ALERT BOX — CCNA VERSION WARNING
+       ═══════════════════════════════════════════════════════════════════
+       📘 <div> is a generic BLOCK container — it groups elements so CSS
+       can style them as a unit. "div" = division. Unlike semantic elements
+       (<nav>, <section>), it carries no meaning by itself. The class name
+       is the only thing that gives it purpose. Use div when no semantic
+       element fits.
+       🔗 https://www.w3schools.com/tags/tag_div.asp                     -->
+  <div class="alert-box">
+
+    <div class="alert-title">⚠ Screenshot Verification</div>
+    <!-- 📘 NESTED DIVS: this div lives INSIDE the alert-box div above.
+         Nesting is how HTML builds structure. The outer div provides
+         the background/border/padding. The inner divs hold the title
+         and body text separately so they can have different typography. -->
+
+    <div class="alert-body">
+      <!-- 📘 <strong> marks text as important. Browsers render it bold
+           by default AND it has semantic meaning — screen readers may
+           stress it when reading aloud. Use <strong> for genuinely
+           important content. Use CSS font-weight: bold for visual-only
+           boldness when there's no semantic importance.
+           🔗 https://www.w3schools.com/tags/tag_strong.asp -->
+      <strong>Verified for CCNA v1.1 (Feb 2026):</strong> security woven throughout, practical over memorization, AI/ML concepts in exam.<br>
+      <!-- 📘 <br> inserts a single line break without starting a new paragraph.
+           Use it sparingly — for most cases, a new <p> is semantically better.
+           Here it creates a visual break between two related sentences that
+           belong in the same paragraph conceptually.
+           🔗 https://www.w3schools.com/tags/tag_br.asp -->
+      <strong>NOT current CCNA:</strong> "agentic AI," "digital network assistants," and "prompt engineering" language matches Cisco's separate <strong>AITECH cert (800-110)</strong> — not CCNA 200-301. Study it as a bonus track, not core CCNA prep.
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       VERDICT BOX — THE OVERALL SCORE
+       ═══════════════════════════════════════════════════════════════════
+       📘 This card uses FLEXBOX to place the 74% number and the
+       description text side by side. See style.css section 8 for the
+       full Flexbox explanation. The short version:
+         display: flex    → children line up in a row
+         align-items: center → children vertically centered
+         gap: 18px        → space between them
+       The green border communicates overall positive result through
+       color alone — no text needed. Color carries meaning.              -->
+  <div class="verdict-box">
+    <div class="verdict-score">74%</div>
+    <div class="verdict-label">
+      <strong>Lab is strong — real hardware is your biggest advantage.</strong><br>
+      You have a Cisco C1111 running IOS XE in production. Most CCNA candidates practice in Packet Tracer simulators. Your gaps are specific and fillable — primarily OSPFv2, IPv6, automation/REST API, and a few Layer 2 security features.
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       DOMAIN CARDS — Six CCNA exam domains
+       ═══════════════════════════════════════════════════════════════════
+       📘 REPEATING STRUCTURE — all six domain cards use the exact same
+       HTML pattern. This is intentional. Consistent structure means:
+         • The reader's eye learns the pattern after the first card
+         • CSS rules apply uniformly — no special-casing
+         • Adding a 7th domain card is a copy-paste, not a redesign
+       This is the DRY principle (Don't Repeat Yourself) expressed in HTML.
+
+       Each card contains:
+         1. .domain-header   → name (left) + percentage (right) via Flexbox
+         2. .bar-bg > .bar-fill → progress bar (width/color set inline)
+         3. .row > .col × 2  → two-column CSS Grid layout
+         4. .item-good / .item-gap / .item-miss → status list items
+       ═══════════════════════════════════════════════════════════════════ -->
+
+
+  <!-- DOMAIN 1 — Network Fundamentals ────────────────────────────────── -->
+  <div class="domain-card">
+
+    <div class="domain-header">
+      <!-- 📘 <span> is used here (not <div>) because the header is a
+           Flexbox row — these two spans are inline siblings that flex
+           flows into position. Either span or div works in a flex container,
+           but span is semantically cleaner for inline text pieces. -->
+      <span class="domain-name">Domain 1 — Network Fundamentals (20% of exam)</span>
+      <span class="domain-pct" style="color:var(--green)">85%</span>
+      <!-- 📘 INLINE STYLE with a CSS variable: style="color:var(--green)"
+           Yes — CSS variables work in inline styles. The browser resolves
+           var(--green) against the :root definition at render time.
+           The color is set inline (not in a class) because each domain has
+           a different score color. Creating six classes for six colors
+           would be over-engineering. Inline is the right call here.
+           🔗 https://www.w3schools.com/html/html_styles.asp -->
+    </div>
+
+    <!-- 📘 PROGRESS BAR — two nested divs.
+         .bar-bg is the full-width gray track. .bar-fill is the colored
+         inner fill. Its width% is this domain's score: 85%.
+         Its background color matches the score color: green.
+         overflow:hidden on .bar-bg clips the fill at the rounded edges.
+         See style.css section 10 for the full explanation. -->
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:85%;background:var(--green)"></div>
+    </div>
+
+    <!-- 📘 CSS GRID: .row creates a 2-column layout.
+         Each direct child .col becomes one grid cell.
+         On screens ≤500px, the @media rule in style.css collapses
+         this to a single column. See style.css section 11. -->
+    <div class="row">
+
+      <div class="col">
+        <!-- 📘 .col-label: text-transform:uppercase is applied in CSS —
+             the HTML says "Lab covers" but the browser renders "LAB COVERS."
+             The source HTML stays lowercase, which is better for
+             accessibility (screen readers read the source, not the visual).
+             color is set inline because each column has a different color. -->
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+
+        <!-- 📘 .item-good — the ✓ before this text is NOT in the HTML.
+             It is injected by CSS ::before pseudo-element. The HTML stays
+             clean. CSS controls the symbol and its color.
+             See style.css section 12 for the full ::before explanation. -->
+        <div class="item-good">Live TCP/IP across 11 VLANs — subnetting is real</div>
+        <div class="item-good">OSI layers practiced via daily troubleshooting</div>
+        <div class="item-good">Dual managed switch topology (GS308EP + GS316EP)</div>
+        <div class="item-good">PoE+ power budgeting — 180W real constraint</div>
+        <div class="item-good">Xfinity bridge mode — you own the routing layer</div>
+      </div>
+
+      <div class="col">
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <!-- 📘 .item-gap — the → arrow is injected by CSS ::before, amber color. -->
+        <div class="item-gap">IPv6 — zero IPv6 in current setup</div>
+        <div class="item-gap">GS316EP has SFP port — document/use it</div>
+        <div class="item-gap">Add physical cabling diagram to GitHub repo</div>
+      </div>
+
+    </div>
+  </div><!-- end Domain 1 -->
+
+
+  <!-- DOMAIN 2 — Network Access ──────────────────────────────────────── -->
+  <!-- 📘 Same structure as Domain 1. Only the content, score, and colors change.
+       This is the power of a reusable component pattern — copy the structure,
+       swap the data. -->
+  <div class="domain-card">
+    <div class="domain-header">
+      <span class="domain-name">Domain 2 — Network Access (20% of exam)</span>
+      <span class="domain-pct" style="color:var(--green)">90%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:90%;background:var(--green)"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+        <div class="item-good">8 VLANs + 3 planned — deeper than exam requires</div>
+        <div class="item-good">802.1Q trunking on real Cisco IOS XE CLI</div>
+        <div class="item-good">Native VLAN 99 — you know why</div>
+        <div class="item-good">5 SSIDs mapped to 5 VLANs on UniFi</div>
+        <div class="item-good">WiFi 6 APs — WPA2/WPA3 capable</div>
+        <div class="item-good">PoE+ 802.3af/at — live devices depend on it</div>
+      </div>
+      <div class="col">
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <div class="item-gap">STP — no evidence of observation/config in README</div>
+        <div class="item-gap">EtherChannel — 3560CX cutover creates this opportunity</div>
+        <div class="item-gap">RSTP/PVST+ — document STP topology once 3560CX is live</div>
+      </div>
+    </div>
+  </div><!-- end Domain 2 -->
+
+
+  <!-- DOMAIN 3 — IP Connectivity / Routing ───────────────────────────── -->
+  <!-- 📘 NOTE THE COLOR SHIFT: score is amber (58%), bar is amber, label says
+       "Critical gaps" in red with .item-miss elements. The visual language
+       communicates urgency — the user reads meaning from color before reading
+       a single word. That's intentional, data-driven design. -->
+  <div class="domain-card">
+    <div class="domain-header">
+      <span class="domain-name">Domain 3 — IP Connectivity / Routing (25% of exam)</span>
+      <span class="domain-pct" style="color:var(--amber)">58%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:58%;background:var(--amber)"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+        <div class="item-good">Inter-VLAN routing via C1111 SVIs — in production</div>
+        <div class="item-good">NAT/PAT — Xfinity bridge → C1111 → all VLANs</div>
+        <div class="item-good">Static routes implied by multi-VLAN topology</div>
+        <div class="item-good">Default route 0.0.0.0/0 to Comcast</div>
+      </div>
+      <div class="col">
+        <div class="col-label" style="color:var(--red)">Critical gaps</div>
+        <!-- 📘 .item-miss — the ✗ is injected by CSS ::before, red color.
+             Used here instead of .item-gap because these are CRITICAL gaps —
+             the class name changes to signal severity. Same HTML element,
+             different class, different symbol and color. -->
+        <div class="item-miss">OSPFv2 — not configured anywhere in lab (exam weight: heavy)</div>
+        <div class="item-miss">IPv6 routing (OSPFv3) — zero presence</div>
+        <div class="item-gap">HSRP / FHRP — needs 2 L3 devices (3560CX opportunity)</div>
+        <div class="item-gap">show ip route, show ip ospf neighbor — practice these daily</div>
+      </div>
+    </div>
+  </div><!-- end Domain 3 -->
+
+
+  <!-- DOMAIN 4 — IP Services ─────────────────────────────────────────── -->
+  <div class="domain-card">
+    <div class="domain-header">
+      <span class="domain-name">Domain 4 — IP Services (10% of exam)</span>
+      <span class="domain-pct" style="color:var(--green)">88%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:88%;background:var(--green)"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+        <div class="item-good">DHCP — 8 pools on C1111, one per VLAN</div>
+        <div class="item-good">DNS — Pi-hole serving all VLANs in production</div>
+        <div class="item-good">NAT/PAT — live, verified, production traffic</div>
+        <div class="item-good">TCP MSS clamping — ip tcp adjust-mss 1380 (advanced)</div>
+        <div class="item-good">SSH — C1111 SSHv2, hardened, local auth</div>
+      </div>
+      <div class="col">
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <div class="item-gap">NTP — configure C1111 explicitly as NTP server, document it</div>
+        <div class="item-gap">SNMP — not in README; add to Pi monitoring stack</div>
+        <div class="item-gap">Syslog — mentioned in security but not configured as exam scenario</div>
+      </div>
+    </div>
+  </div><!-- end Domain 4 -->
+
+
+  <!-- DOMAIN 5 — Security Fundamentals ──────────────────────────────── -->
+  <div class="domain-card">
+    <div class="domain-header">
+      <span class="domain-name">Domain 5 — Security Fundamentals (15% of exam)</span>
+      <span class="domain-pct" style="color:var(--green)">88%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:88%;background:var(--green)"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+        <div class="item-good">4 ACLs — IOT, IOT-AUTO, HOUSEHOLD, GUEST</div>
+        <div class="item-good">Enable secret Type 9 + service password-encryption</div>
+        <div class="item-good">SSHv2 — Telnet disabled, lines hardened</div>
+        <div class="item-good">Zero port forwarding — Ngrok-only ingress</div>
+        <div class="item-good">DNS filtering — Pi-hole 87K+ domains</div>
+        <div class="item-good">Client isolation on guest SSID</div>
+      </div>
+      <div class="col">
+        <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
+        <div class="item-gap">AAA / RADIUS — not configured on C1111</div>
+        <div class="item-gap">DHCP snooping — not in README</div>
+        <div class="item-gap">Dynamic ARP Inspection (DAI)</div>
+        <div class="item-gap">IP Source Guard</div>
+      </div>
+    </div>
+  </div><!-- end Domain 5 -->
+
+
+  <!-- DOMAIN 6 — Automation & Programmability ────────────────────────── -->
+  <!-- 📘 NOTE: &amp; in the title below — HTML ENTITIES.
+       The & character begins HTML entities (like &amp; itself), so typing &
+       directly can confuse the HTML parser. &amp; is the correct, safe way
+       to display a literal ampersand character in HTML.
+       Common entities: &amp; = &    &lt; = <    &gt; = >    &nbsp; = non-breaking space
+       🔗 https://www.w3schools.com/html/html_entities.asp -->
+  <div class="domain-card">
+    <div class="domain-header">
+      <span class="domain-name">Domain 6 — Automation &amp; Programmability (10% of exam)</span>
+      <!-- 📘 35% = red score. Red border on the progress bar. Red "Critical gaps"
+           label. All three color signals fire together — strong visual warning
+           without a single word of emphasis needed. -->
+      <span class="domain-pct" style="color:var(--red)">35%</span>
+    </div>
+    <div class="bar-bg">
+      <div class="bar-fill" style="width:35%;background:var(--red)"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="col-label" style="color:var(--green)">Lab covers</div>
+        <div class="item-good">Docker Compose — IaC thinking applied to services</div>
+        <div class="item-good">Python — closet-monitor + 78K lines of code</div>
+        <div class="item-good">Ansible planned (Phase 7) — start it early</div>
+      </div>
+      <div class="col">
+        <div class="col-label" style="color:var(--red)">Critical gaps</div>
+        <div class="item-miss">REST API calls to network device — never done</div>
+        <div class="item-miss">Ansible network playbooks — planned but not started</div>
+        <div class="item-miss">JSON/YAML parsing of IOS XE output</div>
+        <div class="item-miss">NETCONF / RESTCONF on C1111 (IOS XE supports it)</div>
+        <div class="item-gap">AI/ML in network ops — gen AI for anomaly detection (v1.1 topic)</div>
+      </div>
+    </div>
+  </div><!-- end Domain 6 -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       TOP 5 ACTION ITEMS
+       ═══════════════════════════════════════════════════════════════════ -->
+
+  <p class="section-title">Top 5 actions to close the gaps</p>
+  <!-- 📘 A <p> used as a section heading. A <h2> would be more semantically
+       correct (it is a subheading under the h1 above), but the original
+       design used a styled <p> for visual consistency with the card layout.
+       Both are valid — semantic correctness vs. visual intent. In a real
+       project, prefer <h2> for accessibility and SEO.
+       🔗 https://www.w3schools.com/html/html_headings.asp -->
+
+
+  <!-- 📘 GAP CARDS — same card visual pattern as .domain-card.
+       Consistent component design across the page tells the reader:
+       "these items are the same type of thing." That's called visual
+       consistency — a core principle of UI/UX design. It reduces
+       cognitive load (the reader doesn't have to re-learn the layout). -->
+
+  <div class="gap-card">
+    <div class="gap-title">1. Configure OSPFv2 on C1111 — this is the #1 gap</div>
+    <div class="gap-body">OSPF is the heaviest topic in Domain 3 (25% of exam). Your lab has static routes but zero dynamic routing. Add a loopback interface on C1111, configure OSPF process 1, advertise your VLAN subnets. When 3560CX goes live as L3 core, run OSPF between them. This single task closes your biggest weakness.</div>
+    <!-- 📘 TAG STACKING: class="tag tag-hard" applies TWO classes at once.
+         .tag supplies the base styles (font, padding, border-radius, display).
+         .tag-hard supplies the unique color. This is the BASE + MODIFIER pattern.
+         You can stack as many classes as needed — they all apply simultaneously.
+         🔗 https://www.w3schools.com/css/css_selectors.asp -->
+    <span class="tag tag-hard">High priority</span>
+    <span class="tag tag-done">C1111 supports it natively</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">2. Add IPv6 to at least 2 VLAN interfaces</div>
+    <div class="gap-body">IPv6 is expanded in v1.1. Configure dual-stack on VLAN 10 and VLAN 20 SVIs on C1111. Run show ipv6 interface brief. Takes 30 minutes and closes a real exam gap that most home lab people skip.</div>
+    <span class="tag tag-hard">Medium priority</span>
+    <span class="tag tag-done">C1111 IOS XE supports dual-stack</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">3. Pull Ansible forward — don't wait for Phase 7</div>
+    <div class="gap-body">Automation is 10% of the exam and the fastest-growing section. Write one playbook that backs up your C1111 running config using the cisco.ios.ios_config module. You already have Python skills and Docker. Ansible is a one-afternoon setup, and it feeds Phase 7 directly.</div>
+    <span class="tag tag-hard">High priority</span>
+    <span class="tag tag-add">Pulls Phase 7 forward</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">4. Enable RESTCONF on C1111 and make one Python API call</div>
+    <div class="gap-body">IOS XE supports RESTCONF natively. Enable it (restconf, ip http secure-server), then use Python requests to GET your interface list as JSON. This one task teaches REST API, HTTP methods, JSON parsing, and IOS XE programmability simultaneously — all v1.1 exam topics. One afternoon.</div>
+    <span class="tag tag-hard">High priority</span>
+    <span class="tag tag-add">New v1.1 content</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">5. Configure DHCP snooping + DAI on IoT VLANs</div>
+    <div class="gap-body">Layer 2 security features are in the v1.1 security domain. DHCP snooping and Dynamic ARP Inspection make real security sense on your IoT VLANs anyway. Configure them on VLAN 30 and 31 — they protect against rogue DHCP servers and ARP spoofing from compromised IoT devices.</div>
+    <span class="tag tag-hard">Medium priority</span>
+    <span class="tag tag-done">Fits existing security model</span>
+  </div>
+
+
+</body>
+<!-- 📘 </body> and </html> close their opening tags.
+     Every HTML element that has an opening tag must have a closing tag.
+     The browser is forgiving about missing closing tags, but always
+     close them explicitly — it is correct, readable, and professional. -->
+</html>

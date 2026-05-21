@@ -1,0 +1,468 @@
+/* ============================================================
+   📘 WHAT THIS FILE DOES:
+   Shared stylesheet for the entire Domain-Driven Learning Portfolio.
+   Every page on this site links to this one file — change a rule
+   here and ALL pages update automatically. That's the power of
+   separating your CSS from your HTML.
+
+   Design system: GitHub-inspired dark mode color palette.
+   Typography: Syne (headings/body) + JetBrains Mono (code labels).
+
+   🔗 CSS reference: https://www.w3schools.com/css/
+   ============================================================ */
+
+
+/* ── 1. GOOGLE FONTS ──────────────────────────────────────────
+   📘 @import fetches an external stylesheet BEFORE the rest of
+   this file is read. Here we load two Google Fonts:
+     • Syne          — geometric sans-serif for headings and body
+     • JetBrains Mono — monospace for code-style labels and numbers
+   Monospace means every character is the same width — it looks
+   like a terminal or code editor, which fits a networking context.
+   wght@400;700;800 = font weights to load (400=regular, 700=bold,
+   800=extra bold). Only load what you use — unused weights waste
+   bandwidth.
+   🔗 https://www.w3schools.com/css/css_font.asp               */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+
+
+/* ── 2. CSS RESET ─────────────────────────────────────────────
+   📘 The universal selector (*) targets EVERY element on the page.
+   Every browser (Chrome, Firefox, Safari) applies its own default
+   margins and padding — and they don't agree with each other.
+   This rule zeros all of them out so we start from a clean,
+   predictable baseline. No surprises.
+
+   box-sizing: border-box changes how width/height are calculated:
+     WITHOUT it: padding ADDS to an element's width. A 200px wide
+                 box with 20px padding becomes 240px wide. Confusing.
+     WITH it:    padding is INCLUDED in the width. 200px stays 200px.
+                 Predictable. This is the first rule in almost every
+                 professional stylesheet in the world.
+   🔗 https://www.w3schools.com/css/css_boxmodel.asp           */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ── 3. CSS CUSTOM PROPERTIES (VARIABLES) ─────────────────────
+   📘 :root targets the very top of the HTML document — the highest
+   possible level. Variables defined here are available EVERYWHERE
+   in this file. This pattern is called a "design token system."
+
+   Instead of typing #3fb950 (a green hex color) 15 times across
+   the stylesheet, we define it once as --green and reference it
+   by name with var(--green). To change the entire color scheme,
+   we only edit these lines — not every rule that uses green.
+
+   NAMING RULE: custom properties MUST start with two dashes (--)
+   USAGE:       color: var(--green);   background: var(--bg);
+
+   This palette is GitHub's dark mode — deliberate choice.
+   Developers recognize it. It reads well on all screen types.
+   🔗 https://www.w3schools.com/css/css3_variables.asp         */
+
+:root {
+  /* Background layers — darkest to progressively lighter */
+  --bg:       #0d1117;   /* Page background — near black          */
+  --surface:  #161b22;   /* Card background — one step lighter    */
+  --surface2: #1c2128;   /* Inner fills — two steps lighter       */
+  --border:   #30363d;   /* Subtle separator lines                */
+
+  /* Semantic colors — each carries meaning beyond aesthetics */
+  --green:  #3fb950;     /* Covered / passing / good              */
+  --blue:   #58a6ff;     /* Informational / links / thesis        */
+  --amber:  #d29922;     /* Warning / gap to fill / medium risk   */
+  --red:    #f85149;     /* Critical / missing / high risk        */
+  --purple: #bc8cff;     /* Accent — available for future modules */
+
+  /* Text colors */
+  --text:  #e6edf3;      /* Primary — bright, readable on dark bg */
+  --muted: #8b949e;      /* Secondary — supporting detail text    */
+}
+
+
+/* ── 4. BODY — GLOBAL PAGE SETTINGS ──────────────────────────
+   📘 The body selector styles the entire visible page area.
+   These rules act as inherited defaults — child elements use them
+   unless they define their own values.
+
+   max-width + margin: 0 auto is the classic centering pattern:
+     max-width: 800px  → content never grows wider than 800px
+     margin: 0 auto    → equal auto margins on left and right
+                         horizontally center the content block
+   This keeps line lengths readable on wide desktop monitors.
+
+   padding: 1.5rem adds breathing room around the content.
+   rem = relative to the root font size. Default root = 16px,
+   so 1.5rem = 24px. Using rem instead of px means the spacing
+   scales if the user changes their browser's default font size —
+   better accessibility.
+   🔗 https://www.w3schools.com/css/css_max-width.asp          */
+
+body {
+  background:  var(--bg);
+  color:       var(--text);
+  font-family: 'Syne', sans-serif;  /* sans-serif is the fallback if Syne fails to load */
+  padding:     1.5rem;
+  min-height:  100vh;               /* vh = viewport height — fills the full screen      */
+  max-width:   800px;
+  margin:      0 auto;
+}
+
+
+/* ── 5. HEADINGS ──────────────────────────────────────────────
+   📘 h1 is the most important heading on a page. Rule: use only
+   ONE h1 per page. Screen readers and search engines use it to
+   understand what the page is about — it's the page's "title"
+   in the document outline.
+
+   h1 span — targets a <span> INSIDE the h1. A <span> is an
+   inline element (no line break before/after) used purely as a
+   styling hook. Here it colors just part of the heading text
+   green without affecting the rest.
+   🔗 https://www.w3schools.com/html/html_headings.asp         */
+
+h1 {
+  font-size:     20px;
+  font-weight:   800;
+  margin-bottom: 4px;
+}
+h1 span { color: var(--green); }   /* Colors only the wrapped portion of the heading */
+
+
+/* ── 6. SUBTITLE ─────────────────────────────────────────────
+   📘 The monospace font makes this look like a terminal comment
+   (// Assessed from...). It signals "technical metadata" to the
+   reader without using an actual code block. Font choice carries
+   meaning — it's not just decoration.
+   🔗 https://www.w3schools.com/cssref/pr_font_font-family.php */
+
+.subtitle {
+  font-family:   'JetBrains Mono', monospace;
+  font-size:     11px;
+  color:         var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+
+/* ── 7. ALERT / CALLOUT BOX ──────────────────────────────────
+   📘 Used for warning banners and callout panels.
+   Notice the border uses a hardcoded hex (#6a3f0a) instead of a
+   variable. That's intentional — this amber border tone is specific
+   to this one component and not reused elsewhere on the site.
+   RULE: put a color in :root when you reuse it. Keep it inline
+   when it truly belongs to one element only.
+
+   border-radius: 8px rounds all four corners equally.
+   padding: 12px 16px is CSS shorthand — 12px top/bottom,
+   16px left/right. Two values = vertical then horizontal.
+   🔗 https://www.w3schools.com/css/css_border.asp             */
+
+.alert-box {
+  background:    #2e1a05;
+  border:        1px solid #6a3f0a;
+  border-radius: 8px;
+  padding:       12px 16px;
+  margin-bottom: 1.25rem;
+}
+.alert-title {
+  font-family:    'JetBrains Mono', monospace;
+  font-size:      10px;
+  color:          var(--amber);
+  margin-bottom:  5px;
+  text-transform: uppercase;   /* CSS uppercases the text — HTML source stays lowercase  */
+  letter-spacing: .5px;        /* Slightly wider spacing — improves readability at small sizes */
+}
+.alert-body        { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.alert-body strong { color: var(--text); }  /* <strong> inside alert overrides muted → bright */
+
+
+/* ── 8. VERDICT BOX — THE SCORE CARD ─────────────────────────
+   📘 This is the big "74%" readiness score card. It uses FLEXBOX
+   to place the score number and description text side by side.
+
+   HOW FLEXBOX WORKS:
+   Apply display: flex to a PARENT container. Its direct children
+   automatically line up in a row (the default "flex-direction").
+   The parent is the "flex container." The children are "flex items."
+
+   align-items: center vertically centers both children even though
+   they are different heights — the score number is large, the text
+   block is taller. Without this, they'd align to the top edge.
+
+   flex-shrink: 0 on .verdict-score prevents the number from being
+   compressed when the screen is narrow. Default flex behavior
+   allows items to shrink — we disable that for the score.
+   🔗 https://www.w3schools.com/css/css3_flexbox.asp           */
+
+.verdict-box {
+  background:    var(--surface);
+  border:        1px solid var(--green);  /* Green border = overall positive result */
+  border-radius: 8px;
+  padding:       14px 18px;
+  margin-bottom: 1.25rem;
+  display:       flex;           /* Activates Flexbox — children become flex items */
+  align-items:   center;         /* Vertically centers all children                */
+  gap:           18px;           /* Space between flex items — no margin math needed */
+}
+.verdict-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size:   44px;             /* Prominent — this is the key number             */
+  font-weight: 700;
+  color:       var(--green);
+  line-height: 1;                /* No extra space above/below the number          */
+  flex-shrink: 0;                /* Do not compress this item when space is tight  */
+}
+.verdict-label        { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.verdict-label strong { color: var(--text); }
+
+
+/* ── 9. DOMAIN CARDS ─────────────────────────────────────────
+   📘 Each CCNA domain section is a "card" — a bordered, padded,
+   rounded box. Cards are one of the most common UI patterns in
+   modern web design (Google, GitHub, Notion all use them).
+   They group related content and create visual separation without
+   requiring heavy dividers.
+
+   .domain-header uses Flexbox to put the domain name on the left
+   and the percentage on the right. flex: 1 on .domain-name makes
+   it stretch to fill ALL available space, pushing the percentage
+   to the far right edge. This is called the "push to end" pattern.
+   🔗 https://www.w3schools.com/css/css3_flexbox_items.asp     */
+
+.domain-card {
+  background:    var(--surface);
+  border:        1px solid var(--border);
+  border-radius: 8px;
+  padding:       14px 16px;
+  margin-bottom: 10px;
+}
+.domain-header {
+  display:       flex;
+  align-items:   center;
+  gap:           8px;
+  margin-bottom: 8px;
+}
+.domain-name { font-size: 14px; font-weight: 600; flex: 1; }  /* flex:1 fills remaining space */
+.domain-pct  { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; }
+
+
+/* ── 10. PROGRESS BAR ────────────────────────────────────────
+   📘 Built from two nested <div>s:
+     .bar-bg   = the gray background track (always full width)
+     .bar-fill = the colored fill inside (width varies per domain)
+
+   The width% and color of .bar-fill are set via INLINE STYLE in
+   the HTML — not here in CSS — because each domain has a different
+   score and color. When a value is unique to one element, inline
+   style is the right tool. When a value is shared, use a class.
+
+   overflow: hidden on .bar-bg is the key trick: it clips the
+   fill at the container's rounded corners so the colored bar
+   doesn't visually poke out past the edges.
+   🔗 https://www.w3schools.com/howto/howto_js_progressbar.asp */
+
+.bar-bg {
+  height:        5px;
+  background:    var(--surface2);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  overflow:      hidden;   /* Clips child content at the rounded corners */
+}
+.bar-fill {
+  height:        100%;
+  border-radius: 3px;
+  /* width and background are set per-domain via inline style in the HTML */
+}
+
+
+/* ── 11. TWO-COLUMN GRID ─────────────────────────────────────
+   📘 CSS Grid creates the "Lab covers | Gaps to fill" layout.
+   FLEXBOX vs GRID — know the difference:
+     Flexbox = one dimension (a row OR a column)
+     Grid    = two dimensions (rows AND columns simultaneously)
+   For a two-column layout with content of unpredictable height,
+   Grid is the right tool.
+
+   grid-template-columns: 1fr 1fr — two equal columns.
+   1fr = "1 fraction of the available space." Two 1fr columns each
+   get exactly 50% of the space. The gap is handled automatically —
+   no manual width calculations needed.
+
+   @media (max-width: 500px) is a RESPONSIVE BREAKPOINT.
+   When the viewport is 500px wide or less (a phone), the rule
+   inside fires — switching from 2 columns to 1 column. This is
+   called "responsive design." The layout adapts to the screen.
+   🔗 https://www.w3schools.com/css/css_grid.asp
+   🔗 https://www.w3schools.com/css/css_rwd_mediaqueries.asp   */
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+@media (max-width: 500px) {
+  .row { grid-template-columns: 1fr; }   /* Single column on phones */
+}
+
+.col { font-size: 12px; line-height: 1.7; }
+.col-label {
+  font-family:    'JetBrains Mono', monospace;
+  font-size:      10px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom:  5px;
+}
+
+
+/* ── 12. STATUS INDICATORS — THE ::before PSEUDO-ELEMENT ─────
+   📘 The ✓  →  ✗ symbols before each list item are NOT in the
+   HTML. They are INJECTED by CSS using the ::before pseudo-element.
+
+   ::before inserts generated content immediately BEFORE an
+   element's actual text content. It's "virtual" — it exists in
+   the browser's rendering but not in the HTML source.
+
+   content: "✓ " is what gets inserted. The trailing space keeps
+   the symbol from touching the text.
+
+   WHY USE CSS FOR THIS instead of typing symbols in HTML?
+   — Changing all 20+ checkmarks means editing ONE CSS line,
+     not finding and updating every single HTML element.
+   — HTML stays clean (structure only). CSS controls appearance.
+   — This is the SEPARATION OF CONCERNS principle applied directly.
+   🔗 https://www.w3schools.com/css/css_pseudo_elements.asp    */
+
+.item-good::before { content: "✓ "; color: var(--green); }   /* Covered / complete  */
+.item-gap::before  { content: "→ "; color: var(--amber); }   /* Gap / needs work    */
+.item-miss::before { content: "✗ "; color: var(--red);   }   /* Missing / critical  */
+
+
+/* ── 13. SECTION TITLE ───────────────────────────────────────
+   📘 margin: 1.5rem 0 10px — CSS shorthand for margin.
+   When three values are given, they map to: top | left+right | bottom
+   So: 1.5rem top, 0 sides, 10px bottom. CSS shorthand always
+   reads clockwise starting from the top.
+   🔗 https://www.w3schools.com/css/css_margin.asp             */
+
+.section-title { font-size: 16px; font-weight: 700; margin: 1.5rem 0 10px; }
+
+
+/* ── 14. ACTION / GAP CARDS ──────────────────────────────────
+   📘 The five action items at the bottom of the CCNA report.
+   Notice this card uses the same visual pattern as .domain-card:
+   same background, same border, same border-radius, same padding.
+   Consistent visual language signals to the reader that these
+   items belong to the same design system — even if the content
+   is different. Design consistency = trustworthiness.           */
+
+.gap-card  { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+.gap-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+.gap-body  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+
+/* ── 15. TAGS / BADGES ───────────────────────────────────────
+   📘 The colored pill labels (e.g., "High priority").
+   display: inline-block is required here. Regular inline elements
+   (like <span>) ignore padding — padding doesn't push other
+   content away. inline-block gets padding AND stays on the same
+   line as text. Perfect for badges and chips.
+
+   BASE + MODIFIER PATTERN: .tag holds the shared properties
+   (font, padding, border-radius, display). The modifier classes
+   (.tag-add, .tag-done, .tag-hard) add only what's unique to each
+   type. Usage in HTML: class="tag tag-hard" — stack both classes.
+   This pattern is how CSS frameworks like Bootstrap work.
+   🔗 https://www.w3schools.com/css/css_display.asp             */
+
+.tag {
+  font-family:  'JetBrains Mono', monospace;
+  font-size:    10px;
+  padding:      2px 7px;
+  border-radius: 4px;
+  display:      inline-block;
+  margin-right: 4px;
+  margin-top:   5px;
+}
+.tag-add  { background: #2e2000; color: var(--amber); }   /* To add / configure */
+.tag-done { background: #122010; color: var(--green); }   /* Already supported  */
+.tag-hard { background: #2e1010; color: var(--red);   }   /* High priority      */
+
+
+/* ── 16. HUB PAGE — DOMAIN MODULE CARDS ─────────────────────
+   📘 These styles are used by index.html (the landing page) only.
+   The hub displays three domain module cards stacked vertically.
+   Each card uses Flexbox: icon on the left, content block on the
+   right. align-items: flex-start aligns them to the top edge —
+   better than center when the content block is tall and variable.
+
+   .hub-card.active — this is a COMPOUND SELECTOR. It targets
+   elements that have BOTH the hub-card class AND the active class.
+   Written as .hub-card.active (no space between) = "the element
+   must have both classes." A space would mean "a descendant."
+   🔗 https://www.w3schools.com/css/css_selectors.asp           */
+
+.hub-card {
+  background:    var(--surface);
+  border:        1px solid var(--border);
+  border-radius: 8px;
+  padding:       20px 24px;
+  margin-bottom: 12px;
+  display:       flex;
+  align-items:   flex-start;
+  gap:           16px;
+}
+.hub-card.active { border-color: var(--green); }            /* Live module: green border     */
+.hub-card.soon   { border-color: var(--border); opacity: 0.6; } /* Coming soon: dimmed       */
+
+.hub-icon {
+  font-size:   24px;
+  flex-shrink: 0;     /* Icon never shrinks when the text block grows */
+  margin-top:  2px;
+}
+.hub-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.hub-desc  { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+
+.hub-link {
+  font-family:     'JetBrains Mono', monospace;
+  font-size:       11px;
+  color:           var(--green);
+  text-decoration: none;          /* Removes the default underline from <a> tags */
+}
+.hub-link:hover { text-decoration: underline; }  /* Re-adds it on hover — clear signal to user */
+
+/* ── 17. BADGE CHIPS (HUB PAGE) ──────────────────────────────
+   📘 Small "Live" and "Coming soon" labels above the card title.
+   Same inline-block pattern as .tag but used on the hub page.   */
+.hub-badge {
+  font-family:   'JetBrains Mono', monospace;
+  font-size:     10px;
+  padding:       2px 8px;
+  border-radius: 4px;
+  display:       inline-block;
+  margin-bottom: 8px;
+}
+.hub-badge.live { background: #122010; color: var(--green); }
+.hub-badge.soon { background: var(--surface2); color: var(--muted); }
+
+
+/* ── 18. NAVIGATION — BACK LINK ──────────────────────────────
+   📘 Used on ccna.html, data.html, and swe.html — a simple link
+   back to the hub page.
+
+   By default, <a> tags are blue and underlined (browser defaults).
+   We override both here to match our dark-mode design. The hover
+   state brightens the color from muted to full text — a subtle
+   but clear signal that the element is interactive.
+
+   :hover is a PSEUDO-CLASS — it applies styles only when the
+   user's cursor is over the element. It's different from
+   ::before (a pseudo-ELEMENT that injects content).
+   🔗 https://www.w3schools.com/css/css_pseudo_classes.asp
+   🔗 https://www.w3schools.com/html/html_links.asp            */
+
+.nav { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-bottom: 1.5rem; }
+.nav a        { color: var(--muted); text-decoration: none; }
+.nav a:hover  { color: var(--text); }

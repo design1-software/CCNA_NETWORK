@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- 📘 Same DOCTYPE, same structure as every other page in this project.
+     Consistency across pages is a feature — a reader who learned the
+     pattern on index.html already knows where to look here.
+     🔗 https://www.w3schools.com/tags/tag_doctype.asp -->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data — Domain-Driven Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 📘 Note the href path: "css/style.css" — same relative path as ccna.html
+       because data.html is in the same folder. If this file were in a
+       subfolder, the path would need to be "../css/style.css" (one level up).
+       Getting relative paths right is one of the most common beginner HTML
+       mistakes. When in doubt: where is THIS file, relative to the CSS file?
+       🔗 https://www.w3schools.com/html/html_filepaths.asp -->
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html">← Domain-Driven Portfolio</a>
+  </nav>
+
+  <h1>Data — <span>Module Coming Soon</span></h1>
+  <p class="subtitle">// Python · SQL · Pipelines</p>
+
+  <!-- 📘 REUSING .alert-box as a callout — same technique as index.html.
+       The blue border and background override the default amber tone.
+       inline style="..." takes precedence over class styles (higher specificity).
+       This shows that one well-designed CSS class can serve multiple purposes
+       across different pages when its core structure is solid.
+       🔗 https://www.w3schools.com/css/css_specificity.asp -->
+  <div class="alert-box" style="border-color: var(--blue); background: #0d1f30;">
+    <div class="alert-title" style="color: var(--blue);">📌 What goes here</div>
+    <div class="alert-body">
+      <strong>This module is being built.</strong> It will document real data work —
+      ETL pipelines, SQL queries against live datasets, Python analysis scripts —
+      using the same annotated, teaching-comment approach as the CCNA module.<br><br>
+      The thesis holds: the domain work comes first. The HTML and CSS to present it
+      is the coding skill being learned through the work.
+    </div>
+  </div>
+
+  <p class="section-title">Planned content</p>
+
+  <!-- 📘 PLACEHOLDER CARDS: these gap-cards are placeholders — structural
+       markers for content that will arrive as the Data module is built.
+       Placeholders in HTML are better than leaving a page empty because:
+         1. The page is deployable now — no broken links from the hub
+         2. The structure is already in place — adding real content is a fill-in
+         3. The reader understands what's coming without guesswork
+       This mirrors how professional teams ship: skeleton first, content second. -->
+  <div class="gap-card">
+    <div class="gap-title">SQL — Live database queries</div>
+    <div class="gap-body">Real SELECT, JOIN, WHERE, and aggregate queries against live datasets. Annotated line by line to explain what each clause does and why it was written that way.</div>
+    <span class="tag tag-add">Coming soon</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">Python — ETL pipeline</div>
+    <div class="gap-body">An extract-transform-load script that pulls data from a source, cleans it, and loads it to a destination. Teaching comments explain each function, parameter, and data structure choice.</div>
+    <span class="tag tag-add">Coming soon</span>
+  </div>
+
+  <div class="gap-card">
+    <div class="gap-title">Python — Analysis + visualization</div>
+    <div class="gap-body">Data analysis with pandas and a visualization with matplotlib or similar. The same principle as the CCNA report: real data, real output, annotated code explaining every decision.</div>
+    <span class="tag tag-add">Coming soon</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- 📘 DOCTYPE — required first line of every HTML5 document.
+     Always before anything else — even a blank line before it can
+     trigger "quirks mode" in some browsers, breaking your layout.
+     🔗 https://www.w3schools.com/tags/tag_doctype.asp -->
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Domain-Driven Portfolio</title>
+  <!-- 📘 Each page on a multi-page site should have a UNIQUE <title>.
+       "Domain-Driven Portfolio" identifies the hub. "CCNA Readiness"
+       identifies the report. Unique titles help users with many tabs
+       open and improve search engine indexing of individual pages.
+       🔗 https://www.w3schools.com/tags/tag_title.asp -->
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 📘 Same stylesheet, different page. This is why we extracted the
+       CSS into an external file. index.html, ccna.html, data.html, and
+       swe.html all share one style.css. Consistent design, zero duplication.
+       🔗 https://www.w3schools.com/css/css_howto.asp -->
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       PAGE HEADER
+       ═══════════════════════════════════════════════════════════════════
+       📘 <header> is a semantic HTML5 element that marks the introductory
+       section of the page. It typically contains the page title and
+       subtitle. Using <header> instead of a plain <div> communicates
+       intent — a developer (or browser) reading the markup immediately
+       understands what this section is for.
+       🔗 https://www.w3schools.com/html/html5_semantic_elements.asp     -->
+  <header>
+    <h1>Domain-Driven <span>Portfolio</span></h1>
+    <p class="subtitle">// SWE · Data · Networking — real work, real code</p>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       THESIS CALLOUT
+       ═══════════════════════════════════════════════════════════════════
+       📘 REUSING A CLASS FOR A NEW PURPOSE: .alert-box was originally
+       designed for warnings in ccna.html. Here it's repurposed as a
+       thesis callout with a blue border. Same CSS class, different
+       inline style overrides (border-color and background).
+
+       This demonstrates an important CSS principle: classes are
+       REUSABLE PATTERNS, not one-off names. The visual structure
+       (rounded box, padding, label + body) is the pattern. The color
+       is the variation.
+
+       style="border-color: var(--blue); background: #0d1f30;" overrides
+       specific properties from the .alert-box class. Inline styles always
+       win over class styles — they have higher SPECIFICITY (priority).
+       🔗 https://www.w3schools.com/css/css_specificity.asp             -->
+  <div class="alert-box" style="border-color: var(--blue); background: #0d1f30;">
+    <div class="alert-title" style="color: var(--blue);">📌 The Thesis</div>
+    <div class="alert-body">
+      <strong>Learning to code doesn't require a toy project.</strong>
+      Real domain work — a network assessment, a data pipeline, a system design —
+      is enough. Every module below started as work in its domain. The code came
+      from that work, not the other way around.
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       DOMAIN MODULE CARDS
+       ═══════════════════════════════════════════════════════════════════
+       📘 <section> is a semantic HTML5 element for a thematic group of
+       content. Use it when a chunk of your page has its own internal topic.
+       Here: "the three domain modules" is a coherent section.
+
+       <main> would also be appropriate here — it marks the primary content
+       of the page (as opposed to nav, header, footer). In a full project
+       you might wrap everything in <main>. These semantic choices layer
+       accessibility and SEO benefits at no visual cost.
+       🔗 https://www.w3schools.com/html/html5_semantic_elements.asp     -->
+  <section>
+    <p class="section-title">Modules</p>
+
+    <!-- MODULE 1 — NETWORKING ──────────────────────────────────────────
+         📘 class="hub-card active" — TWO classes on one element.
+         When you write multiple class names separated by spaces, ALL of
+         them apply simultaneously. The browser merges their styles.
+           .hub-card  → base card layout (flex, padding, border-radius)
+           .active    → green border (compound selector .hub-card.active
+                        in CSS — see style.css section 16)
+         This is the BASE + MODIFIER pattern. It's how Bootstrap, Tailwind,
+         and virtually every CSS framework in existence works.
+         🔗 https://www.w3schools.com/css/css_selectors.asp             -->
+    <div class="hub-card active">
+
+      <div class="hub-icon">🌐</div>
+      <!-- 📘 This div is a FLEX ITEM inside .hub-card (which has display:flex).
+           It sits to the right of the icon. flex-shrink:0 on .hub-icon
+           keeps the icon fixed-width; this div gets all remaining space.
+           That's how the icon-left, content-right layout is achieved — no
+           floats, no absolute positioning, just one flex rule. -->
+
+      <div class="hub-body">
+
+        <span class="hub-badge live">Live</span>
+        <!-- 📘 hub-badge.live — compound class. .hub-badge sets the base
+             badge style. .live adds the green background. Same pattern as
+             .tag.tag-done in ccna.html — consistent design language. -->
+
+        <div class="hub-title">Networking — CCNA 200-301</div>
+
+        <div class="hub-desc">
+          Enterprise homelab assessment: Cisco C1111 IOS XE router, 11 VLANs,
+          dual managed switches, UniFi WiFi 6, Pi-hole DNS. The lab is real.
+          The readiness gaps are real. The HTML and CSS used to document it
+          is what you're learning right now.
+        </div>
+
+        <a href="ccna.html" class="hub-link">View report →</a>
+        <!-- 📘 <a href="ccna.html"> — a RELATIVE LINK to another page on this site.
+             No http://, no domain name — just the filename. The browser looks
+             for ccna.html in the same folder as this index.html.
+
+             RELATIVE vs ABSOLUTE paths:
+               Relative: "ccna.html"          → same folder as current file
+               Absolute: "https://yoursite.netlify.app/ccna.html" → full URL
+
+             Use relative paths for internal links — they keep working even
+             if you change your domain name or deploy to a different host.
+             🔗 https://www.w3schools.com/html/html_filepaths.asp          -->
+
+      </div>
+    </div><!-- end Module 1 -->
+
+
+    <!-- MODULE 2 — DATA ────────────────────────────────────────────────
+         📘 class="hub-card soon" — the .soon modifier sets opacity: 0.6 in
+         CSS, visually dimming this card. The HTML structure is IDENTICAL to
+         the active card — only the class name changes. That's exactly what
+         CSS classes are for: applying consistent rules to any element that
+         carries the class, regardless of where it appears.
+
+         Dimming "coming soon" content is a UX pattern — it signals
+         "this exists in the roadmap but isn't ready yet" without
+         hiding the content entirely. The user sees the shape of what's
+         coming without being misled into clicking a dead feature. -->
+    <div class="hub-card soon">
+      <div class="hub-icon">📊</div>
+      <div class="hub-body">
+        <span class="hub-badge soon">Coming soon</span>
+        <div class="hub-title">Data — Python · SQL · Pipelines</div>
+        <div class="hub-desc">
+          Real data work: ETL pipelines, SQL queries against live datasets,
+          Python analysis scripts. The same principle — domain work becomes
+          annotated, teachable code.
+        </div>
+        <a href="data.html" class="hub-link">Preview →</a>
+      </div>
+    </div><!-- end Module 2 -->
+
+
+    <!-- MODULE 3 — SWE ─────────────────────────────────────────────────
+         📘 All three hub-cards share identical HTML structure.
+         The pattern: icon | badge | title | description | link.
+         When similar things look the same in code AND in the browser,
+         readers — both human and machine — can predict what comes next.
+         That predictability reduces cognitive load and makes the codebase
+         easier to maintain and extend. Adding a Module 4 is a copy-paste. -->
+    <div class="hub-card soon">
+      <div class="hub-icon">⚙️</div>
+      <div class="hub-body">
+        <span class="hub-badge soon">Coming soon</span>
+        <div class="hub-title">SWE — Systems · APIs · Architecture</div>
+        <div class="hub-desc">
+          Software engineering work: system design, REST APIs, backend
+          architecture. The domain is different. The approach is the same.
+        </div>
+        <a href="swe.html" class="hub-link">Preview →</a>
+      </div>
+    </div><!-- end Module 3 -->
+
+  </section>
+
+
+</body>
+</html>
