@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2 + IPv6 configured</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, IPv6, DHCP snooping, DAI configured</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">79%</div>
+    <div class="verdict-score">81%</div>
     <div class="verdict-label">
-      <strong>OSPFv2 and IPv6 dual-stack are now live on JLM-LAB-R1.</strong><br>
-      Two of the top 5 gaps closed in one session. Remaining focus: automation/REST API (Domain 6), OSPFv3, and Layer 2 security features (DHCP snooping, DAI). Real hardware, real progress.
+      <strong>4 of 5 original action items closed — OSPFv2, IPv6, DHCP snooping, and DAI all live.</strong><br>
+      JLM-LAB-SW1 (WS-C3560CX-8PC-S) is active. Remaining focus: automation/REST API (Domain 6), OSPFv3, AAA/RADIUS, and IP Source Guard.
     </div>
   </div>
 
@@ -350,13 +350,20 @@
 
 
   <!-- DOMAIN 5 — Security Fundamentals ──────────────────────────────── -->
+  <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026:
+       DHCP snooping and DAI moved from .item-gap to .item-good.
+       Configured on JLM-LAB-SW1 (WS-C3560CX-8PC-S), VLANs 30/31/40/50/60.
+       This is exactly how a living document works — the class name changes
+       (.item-gap → .item-good), the CSS ::before pseudo-element changes the
+       symbol (→ becomes ✓), and the color shifts from amber to green.
+       One attribute change in HTML drives three visual changes via CSS. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 5 — Security Fundamentals (15% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">88%</span>
+      <span class="domain-pct" style="color:var(--green)">93%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:88%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:93%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -367,13 +374,13 @@
         <div class="item-good">Zero port forwarding — Ngrok-only ingress</div>
         <div class="item-good">DNS filtering — Pi-hole 87K+ domains</div>
         <div class="item-good">Client isolation on guest SSID</div>
+        <div class="item-good">DHCP snooping — JLM-LAB-SW1, VLANs 30/31/40/50/60, Option 82 disabled</div>
+        <div class="item-good">DAI — JLM-LAB-SW1, VLANs 30/31/40/50/60, uplinks trusted, 15 pps on access ports</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
         <div class="item-gap">AAA / RADIUS — not configured on C1111</div>
-        <div class="item-gap">DHCP snooping — not in README</div>
-        <div class="item-gap">Dynamic ARP Inspection (DAI)</div>
-        <div class="item-gap">IP Source Guard</div>
+        <div class="item-gap">IP Source Guard — next layer after snooping + DAI</div>
       </div>
     </div>
   </div><!-- end Domain 5 -->
@@ -469,10 +476,10 @@
   </div>
 
   <div class="gap-card">
-    <div class="gap-title">5. Configure DHCP snooping + DAI on IoT VLANs</div>
-    <div class="gap-body">Layer 2 security features are in the v1.1 security domain. DHCP snooping and Dynamic ARP Inspection make real security sense on your IoT VLANs anyway. Configure them on VLAN 30 and 31 — they protect against rogue DHCP servers and ARP spoofing from compromised IoT devices.</div>
-    <span class="tag tag-hard">Medium priority</span>
-    <span class="tag tag-done">Fits existing security model</span>
+    <div class="gap-title">5. ✓ DHCP snooping + DAI on IoT VLANs — closed May 21, 2026</div>
+    <div class="gap-body">Configured on JLM-LAB-SW1 (WS-C3560CX-8PC-S). DHCP snooping operational on VLANs 30, 31, 40, 50, 60 — Option 82 disabled for local DHCP topology. DAI active on same VLANs — Gi0/2/3/4 trusted (uplinks), Gi0/5–12 untrusted at 15 pps. Gi0/1 correctly excluded from both features (routed L3 port, not subject to L2 inspection). Verified with show ip dhcp snooping and show ip arp inspection interfaces. Next: IP Source Guard on IoT VLANs.</div>
+    <span class="tag tag-done">Closed</span>
+    <span class="tag tag-done">3560CX live as JLM-LAB-SW1</span>
   </div>
 
 
