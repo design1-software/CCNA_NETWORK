@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 25, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 25, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, IP Source Guard, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">89%</div>
+    <div class="verdict-score">90%</div>
     <div class="verdict-label">
-      <strong>OSPFv3 running. Every routing protocol on the exam now covered in the lab.</strong><br>
-      Remaining gaps are amber: HSRP/FHRP, EtherChannel, IP Source Guard, Syslog, and AI/ML in network ops.
+      <strong>Domain 5 complete. Full L2 security stack live: DHCP snooping → DAI → IP Source Guard.</strong><br>
+      Remaining gaps are amber: HSRP/FHRP, EtherChannel, Syslog, and AI/ML in network ops.
     </div>
   </div>
 
@@ -389,10 +389,10 @@
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 5 — Security Fundamentals (15% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">95%</span>
+      <span class="domain-pct" style="color:var(--green)">97%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:95%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:97%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -417,12 +417,17 @@
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <!-- 📘 One gap remains in Domain 5.
-             IP Source Guard adds a third layer on top of DHCP snooping and
-             DAI — it binds IP addresses to switch ports using the DHCP
-             snooping binding table and drops packets from IPs not in that
-             table. Configured on the same IoT VLANs as snooping + DAI. -->
-        <div class="item-gap">IP Source Guard — next layer after snooping + DAI on IoT VLANs</div>
+        <!-- 📘 LIVING DOCUMENT UPDATE — May 25, 2026:
+             IP Source Guard configured on Gi0/5–8 (IoT access ports).
+             Status: inactive-no-snooping-vlan — correct and expected.
+             IP Source Guard uses the DHCP snooping binding table to verify
+             source IPs. No bindings yet because no devices are plugged in.
+             The moment a device connects at Phase B, gets a DHCP lease, and
+             populates the binding table — Source Guard activates automatically.
+             No additional configuration needed. The security stack is complete:
+             DHCP snooping → DAI → IP Source Guard, all on the same IoT VLANs.
+             Three layers of L2 protection, each dependent on the one below it. -->
+        <div class="item-good">IP Source Guard — configured on Gi0/5–8, activates automatically at Phase B when binding table populates</div>
       </div>
     </div>
   </div><!-- end Domain 5 -->
