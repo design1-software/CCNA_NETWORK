@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 21, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, NTP, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 25, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -161,7 +161,7 @@
     <div class="verdict-score">89%</div>
     <div class="verdict-label">
       <strong>OSPFv3 running. Every routing protocol on the exam now covered in the lab.</strong><br>
-      Remaining gaps are amber: HSRP/FHRP, EtherChannel, AAA/RADIUS, IP Source Guard, Syslog, and AI/ML in network ops.
+      Remaining gaps are amber: HSRP/FHRP, EtherChannel, IP Source Guard, Syslog, and AI/ML in network ops.
     </div>
   </div>
 
@@ -378,20 +378,21 @@
 
 
   <!-- DOMAIN 5 — Security Fundamentals ──────────────────────────────── -->
-  <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026:
-       DHCP snooping and DAI moved from .item-gap to .item-good.
-       Configured on JLM-LAB-SW1 (WS-C3560CX-8PC-S), VLANs 30/31/40/50/60.
-       This is exactly how a living document works — the class name changes
-       (.item-gap → .item-good), the CSS ::before pseudo-element changes the
-       symbol (→ becomes ✓), and the color shifts from amber to green.
-       One attribute change in HTML drives three visual changes via CSS. -->
+  <!-- 📘 LIVING DOCUMENT UPDATE — May 25, 2026:
+       AAA moved from .item-gap to .item-good. aaa new-model enabled on C1111.
+       Local authentication configured for login and exec authorization.
+       Line console 0 and vty 0-4 both using the default AAA method list.
+       SSH tested and confirmed working post-AAA. Config saved.
+       aaa accounting was attempted — not supported on IOS XE 16.10 without
+       a TACACS/RADIUS server. Accounting to FreeRADIUS is a Phase C task.
+       IOS also auto-added aaa session-id common and encrypted private config. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 5 — Security Fundamentals (15% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">93%</span>
+      <span class="domain-pct" style="color:var(--green)">95%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:93%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:95%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
@@ -404,11 +405,24 @@
         <div class="item-good">Client isolation on guest SSID</div>
         <div class="item-good">DHCP snooping — JLM-LAB-SW1, VLANs 30/31/40/50/60, Option 82 disabled</div>
         <div class="item-good">DAI — JLM-LAB-SW1, VLANs 30/31/40/50/60, uplinks trusted, 15 pps on access ports</div>
+        <!-- 📘 AAA — Authentication, Authorization, Accounting — is the IOS
+             framework that replaces line-level passwords with a centralized
+             policy. 'aaa new-model' enables it globally and overrides all
+             line passwords immediately. Local authentication means the router
+             checks its own username database — no external server needed.
+             RADIUS/TACACS+ (external server) is Phase C with FreeRADIUS on
+             Proxmox. The local framework is the CCNA-relevant piece. -->
+        <div class="item-good">AAA — aaa new-model, local auth + exec authorization, console + vty hardened</div>
+        <div class="item-good">login on-success log — successful logins recorded to syslog</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <div class="item-gap">AAA / RADIUS — not configured on C1111</div>
-        <div class="item-gap">IP Source Guard — next layer after snooping + DAI</div>
+        <!-- 📘 One gap remains in Domain 5.
+             IP Source Guard adds a third layer on top of DHCP snooping and
+             DAI — it binds IP addresses to switch ports using the DHCP
+             snooping binding table and drops packets from IPs not in that
+             table. Configured on the same IoT VLANs as snooping + DAI. -->
+        <div class="item-gap">IP Source Guard — next layer after snooping + DAI on IoT VLANs</div>
       </div>
     </div>
   </div><!-- end Domain 5 -->
