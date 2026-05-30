@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 25, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, IP Source Guard, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+ live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 27, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, IP Source Guard, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+, Proxmox live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -371,7 +371,11 @@
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
         <div class="item-gap">SNMP Pi integration — router configured, polling from Pi stack not yet confirmed</div>
-        <div class="item-gap">Syslog — mentioned in security but not configured as exam scenario</div>
+        <!-- 📘 Proxmox is now live at 100.71.239.21 — a syslog collector VM
+             (Graylog, rsyslog, or similar) can now be deployed on vmstore.
+             Logging IOS XE events to a centralized server is a CCNA exam topic:
+             'logging host <ip>' on the C1111 + a receiving service = complete. -->
+        <div class="item-gap">Syslog — Proxmox live (100.71.239.21); syslog VM deployment now unblocked</div>
       </div>
     </div>
   </div><!-- end Domain 4 -->
@@ -472,6 +476,17 @@
         <div class="item-good">REST API — 5 GET queries: hostname, version, interfaces, OSPF, NTP</div>
         <div class="item-good">JSON parsing — interface table, OSPF networks, NTP config from API responses</div>
         <div class="item-good">HTTP GET method — demonstrated across all 5 resource queries</div>
+        <!-- 📘 INFRASTRUCTURE UPDATE — May 27, 2026:
+             Proxmox VE 9.2 is live on a custom ATX server (Ryzen 9 7900X,
+             64GB DDR5, 2TB NVMe). This is the compute layer above the network —
+             the server that hosts VMs for every Phase C+ task.
+             Tailscale node 7: pve (100.71.239.21). Web UI: 192.168.100.10:8006.
+             vmstore = 1.8TB LVM-thin pool for VM disks.
+             Proxmox unblocks: FreeRADIUS (AAA accounting), Syslog server,
+             Wazuh SIEM, Ansible AWX, and any future lab VM workloads.
+             Provisioning VMs on Proxmox via Terraform or Ansible is the next
+             IaC layer — infrastructure automation in practice. -->
+        <div class="item-good">Proxmox VE 9.2 — custom server live, Tailscale node 7 (100.71.239.21), vmstore 1.8TB NVMe</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
