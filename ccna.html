@@ -103,7 +103,7 @@
        The <span> itself has zero visual effect — the class does the work.
        🔗 https://www.w3schools.com/tags/tag_span.asp -->
 
-  <p class="subtitle">// Assessed from git-init-home-lab README · Updated May 27, 2026 — OSPFv2, OSPFv3, IPv6, DHCP snooping, DAI, IP Source Guard, NTP, AAA, Ansible/Netmiko, RESTCONF, REST API, Rapid-PVST+, Proxmox live</p>
+  <p class="subtitle">// Assessed from git-init-home-lab README · Updated June 2, 2026 — Phase B complete: 3560CX L3 core, HSRP, OSPFv2 adjacency, TRANSIT 199, OSPFv3, AAA, full L2 security stack, RESTCONF live</p>
   <!-- 📘 <p> is a PARAGRAPH — a block-level element with automatic top and
        bottom spacing. class="subtitle" connects it to the .subtitle rule in
        style.css, which applies the monospace font and muted color.
@@ -158,10 +158,10 @@
        The green border communicates overall positive result through
        color alone — no text needed. Color carries meaning.              -->
   <div class="verdict-box">
-    <div class="verdict-score">90%</div>
+    <div class="verdict-score">93%</div>
     <div class="verdict-label">
-      <strong>Domain 5 complete. Full L2 security stack live: DHCP snooping → DAI → IP Source Guard.</strong><br>
-      Remaining gaps are amber: HSRP/FHRP, EtherChannel, Syslog, and AI/ML in network ops.
+      <strong>Phase B complete. 3560CX is L3 core. HSRP live. Real OSPFv2 adjacency. Every CCNA routing topic covered.</strong><br>
+      Remaining gaps: EtherChannel, post-cutover cleanup, Syslog, and AI/ML in network ops.
     </div>
   </div>
 
@@ -257,29 +257,23 @@
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 2 — Network Access (20% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">93%</span>
+      <span class="domain-pct" style="color:var(--green)">95%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:93%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:95%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
         <div class="col-label" style="color:var(--green)">Lab covers</div>
-        <div class="item-good">8 VLANs + 3 planned — deeper than exam requires</div>
-        <div class="item-good">802.1Q trunking on real Cisco IOS XE CLI</div>
+        <!-- 📘 LIVING DOCUMENT UPDATE — June 2, 2026 (Phase B):
+             VLAN count updated, TRANSIT added, trunk layout documented. -->
+        <div class="item-good">9 active VLANs (1/10/20/30/31/40/50/99/199) + VLAN 60/70 pending Phase C/D</div>
+        <div class="item-good">802.1Q trunking — 3560CX Gi0/2→GS308EP, Gi0/3→GS316EP, Gi0/4→Proxmox (reserved)</div>
+        <div class="item-good">TRANSIT VLAN 199 (192.168.199.0/30) — routed P2P, 3560CX Gi0/1 → C1111 GE0/1/0</div>
         <div class="item-good">Native VLAN 99 — you know why</div>
         <div class="item-good">5 SSIDs mapped to 5 VLANs on UniFi</div>
         <div class="item-good">WiFi 6 APs — WPA2/WPA3 capable</div>
         <div class="item-good">PoE+ 802.3af/at — live devices depend on it</div>
-        <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026:
-             STP moved from "Gaps to fill" to "Lab covers."
-             JLM-LAB-SW1 (3560CX) is configured: Rapid-PVST+ mode, Extended
-             system ID enabled, Bridge Assurance enabled. No instances are
-             active — correct behavior when there are no redundant L2 paths.
-             STP is loop prevention. No redundant paths = nothing to block.
-             The C1111 is a Layer 3 router — STP is a Layer 2 protocol and
-             does not run on routed interfaces. Both behaviors are expected
-             and confirm the topology is correct. -->
         <div class="item-good">Rapid-PVST+ on JLM-LAB-SW1 — Extended system ID + Bridge Assurance configured</div>
         <div class="item-good">STP loop prevention — no instances without redundant L2 paths (correct behavior)</div>
       </div>
@@ -297,46 +291,80 @@
 
 
   <!-- DOMAIN 3 — IP Connectivity / Routing ───────────────────────────── -->
-  <!-- 📘 LIVING DOCUMENT UPDATE — May 21, 2026 (third pass):
-       OSPFv3 is now running. Score moves 72% → 82%, color shifts amber → green.
-       OSPFv3 output confirmed: Lo0 in LOOP state (stable router-ID anchor),
-       Vlan10 and Vlan20 both DR with no neighbors — correct for a single router.
-       Area 0 backbone inactive with no neighbors — also correct. No OSPFv3
-       routes in the table because there's nothing else to learn from. Every
-       behavior is expected. The protocol is configured and running — the exam
-       cares that you can configure it, not that you have a full mesh.
-       Only remaining gap: HSRP / FHRP — needs a second L3 device. -->
+  <!-- 📘 LIVING DOCUMENT UPDATE — June 2, 2026 (Phase B complete):
+       Score moves 82% → 95%. This is the biggest single update in the document.
+
+       Phase B cutover is complete. The routing architecture changed:
+         BEFORE: C1111 SVIs owned every VLAN subnet and routed all inter-VLAN traffic.
+         AFTER:  3560CX is the L3 core — SVIs own .1 on every active VLAN.
+                 C1111 is edge-only (NAT, WAN, ACLs) connected via TRANSIT /30.
+
+       Three new exam topics are now live:
+         1. TRANSIT VLAN 199 (192.168.199.0/30) — routed P2P link between
+            C1111 GE0/1/0 (.1) and 3560CX Gi0/1 (.2). This is a real L3
+            routed link — not a trunk, not an SVI-to-SVI — a /30 point-to-point.
+         2. OSPFv2 adjacency — FULL state between C1111 and 3560CX over the
+            TRANSIT link. A real neighbor relationship, not a single-router
+            config. C1111 redistributes the default route. 3560CX learns it.
+         3. HSRP — VIP 192.168.10.1 on MGMT (VLAN 10). The 3560CX SVI is
+            the active gateway. This is what hosts use as their default gateway —
+            the VIP, not the physical SVI IP. HSRP protects against gateway
+            failure; if the active device fails, standby takes over, VIP stays.
+
+       The last CCNA gap in Domain 3 is closed. -->
   <div class="domain-card">
     <div class="domain-header">
       <span class="domain-name">Domain 3 — IP Connectivity / Routing (25% of exam)</span>
-      <span class="domain-pct" style="color:var(--green)">82%</span>
+      <span class="domain-pct" style="color:var(--green)">95%</span>
     </div>
     <div class="bar-bg">
-      <div class="bar-fill" style="width:82%;background:var(--green)"></div>
+      <div class="bar-fill" style="width:95%;background:var(--green)"></div>
     </div>
     <div class="row">
       <div class="col">
         <div class="col-label" style="color:var(--green)">Lab covers</div>
-        <div class="item-good">Inter-VLAN routing via C1111 SVIs — in production</div>
-        <div class="item-good">NAT/PAT — Xfinity bridge → C1111 → all VLANs</div>
-        <div class="item-good">Static routes implied by multi-VLAN topology</div>
-        <div class="item-good">Default route 0.0.0.0/0 to Comcast</div>
-        <div class="item-good">OSPFv2 — process 1, router-id 10.0.0.1, 9 networks in area 0</div>
-        <div class="item-good">IPv6 unicast-routing enabled — dual-stack on Vlan10 + Vlan20</div>
-        <!-- 📘 LIVING DOCUMENT UPDATE — OSPFv3 moved from gap to covered.
-             The CSS class .item-good and .item-gap differ only in class name —
-             but that name change flips the ::before symbol from → (amber) to
-             ✓ (green). One attribute change, instant visual communication.
-             This is why accurate class names matter: they ARE the data. -->
+        <!-- 📘 Item updated: routing moved from C1111 to 3560CX at Phase B.
+             The C1111 still does NAT and holds the WAN default route —
+             but inter-VLAN routing is now the 3560CX's job. This is the
+             correct enterprise architecture: L3 core switch does routing,
+             edge router does NAT/WAN. The C1111 is now edge-only. -->
+        <div class="item-good">Inter-VLAN routing — 3560CX L3 core SVIs (Phase B cutover · C1111 edge-only)</div>
+        <div class="item-good">NAT/PAT — C1111 edge: Xfinity bridge → C1111 → all VLANs via 3560CX</div>
+        <div class="item-good">Default route — C1111 0.0.0.0/0 to Comcast, redistributed via OSPFv2 to 3560CX</div>
+        <!-- 📘 OSPFv2 item upgraded: was single-router config, now has a real
+             adjacency. 'show ip ospf neighbor' now shows an actual neighbor.
+             The TRANSIT /30 is the link — C1111 (.1) and 3560CX (.2) are
+             directly connected on it, and OSPF forms FULL state between them.
+             This is the most CCNA-relevant routing scenario: two devices,
+             one protocol, one adjacency, redistributing a default route. -->
+        <div class="item-good">OSPFv2 — real adjacency: C1111 ↔ 3560CX over TRANSIT 199 (192.168.199.0/30), FULL state</div>
+        <!-- 📘 TRANSIT VLAN 199: a /30 subnet is designed for P2P routed links.
+             /30 gives exactly 2 usable IPs (.1 and .2) — one per end.
+             No wasted addresses, no broadcast domain for hosts.
+             This is how enterprise networks connect L3 devices: routed /30s,
+             not trunks with shared VLAN SVIs. -->
+        <div class="item-good">TRANSIT link — 192.168.199.0/30, C1111 GE0/1/0 (.1) ↔ 3560CX Gi0/1 (.2)</div>
+        <!-- 📘 HSRP (Hot Standby Router Protocol) is a FHRP — First Hop
+             Redundancy Protocol. It creates a virtual IP (VIP) that hosts
+             use as their default gateway. The active device answers for the
+             VIP. If it fails, standby takes over and the VIP stays the same —
+             hosts never notice. VIP = 192.168.10.1 (what hosts point to).
+             3560CX SVI = different IP, HSRP active. -->
+        <div class="item-good">HSRP — VIP 192.168.10.1 on MGMT (VLAN 10), 3560CX active gateway</div>
+        <div class="item-good">IPv6 unicast-routing — dual-stack on Vlan10 + Vlan20</div>
         <div class="item-good">OSPFv3 — running on Lo0, Vlan10, Vlan20 · DR state · Area 0 configured</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <!-- 📘 One gap remains in Domain 3.
-             HSRP requires two Layer 3 devices to elect a virtual gateway.
-             The 3560CX (JLM-LAB-SW1) creates that opportunity once its
-             Layer 3 SVIs are configured. Two devices + shared VLAN = HSRP lab. -->
-        <div class="item-gap">HSRP / FHRP — needs 2 L3 devices (3560CX opportunity)</div>
+        <!-- 📘 Two cleanup items remain from the Phase B cutover.
+             These are not exam gaps — they're post-migration hygiene.
+             The C1111 still has VLAN SVIs and DHCP pools that are no
+             longer authoritative (3560CX owns routing now). They're
+             harmless but should be removed to reflect actual state.
+             The 3560CX static default was a pre-OSPF workaround — once
+             OSPF redistributes the default route, the static is redundant. -->
+        <div class="item-gap">Post-cutover cleanup — C1111 VLAN SVIs/DHCP pools not yet removed</div>
+        <div class="item-gap">Post-cutover cleanup — 3560CX static default not yet removed (OSPF now handles it)</div>
       </div>
     </div>
   </div><!-- end Domain 3 -->
@@ -401,7 +429,11 @@
     <div class="row">
       <div class="col">
         <div class="col-label" style="color:var(--green)">Lab covers</div>
-        <div class="item-good">4 ACLs — IOT, IOT-AUTO, HOUSEHOLD, GUEST</div>
+        <!-- 📘 ACL enforcement moved from C1111 SVIs to 3560CX SVIs at Phase B.
+             Applied inbound on the SVI — traffic hits the ACL before the
+             switch decides where to route it. Same ACL logic, better placement:
+             traffic from IoT VLANs is filtered at the L3 core, not the edge. -->
+        <div class="item-good">4 ACLs — IOT, IOT-AUTO, HOUSEHOLD, GUEST · enforced on 3560CX SVIs (Phase B)</div>
         <div class="item-good">Enable secret Type 9 + service password-encryption</div>
         <div class="item-good">SSHv2 — Telnet disabled, lines hardened</div>
         <div class="item-good">Zero port forwarding — Ngrok-only ingress</div>
