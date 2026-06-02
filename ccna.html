@@ -501,10 +501,19 @@
         <div class="item-good">Docker Compose — IaC thinking applied to services</div>
         <div class="item-good">Python — closet-monitor + 78K lines of code</div>
         <div class="item-good">Ansible architecture — full project: inventory, vault, playbook, cfg</div>
-        <div class="item-good">Netmiko — working backup script, connects to C1111, timestamped output</div>
+        <!-- 📘 Netmiko updated post-Phase B: C1111 now reached via TRANSIT IP
+             (192.168.199.1) not the old MGMT SVI. 3560CX added as second target
+             (192.168.99.2 on MGMT SVI). Both use legacy KEX workarounds
+             required because cisco.ios Ansible collection breaks on IOS XE 16.10
+             and IOS 15.2 — Netmiko configures paramiko directly and bypasses this.
+             Credentials via CISCO_USERNAME / CISCO_PASSWORD env vars. -->
+        <div class="item-good">Netmiko — backup both devices: C1111 (192.168.199.1) + 3560CX (192.168.99.2), timestamped output</div>
         <div class="item-good">JSON/YAML — YAML inventory, vault.yml, playbook files all working</div>
         <div class="item-good">SSH KEX — documented legacy IOS vs modern SSH incompatibility</div>
-        <div class="item-good">RESTCONF — enabled on C1111, IOS XE YANG model paths confirmed</div>
+        <!-- 📘 RESTCONF target IP needs updating from 192.168.10.1 (old MGMT SVI)
+             to 192.168.199.1 (TRANSIT link) post-Phase B cutover. Script is
+             functional — one env var or constant to update. -->
+        <div class="item-good">RESTCONF — enabled on C1111, IOS XE YANG model paths confirmed · target IP update pending (→ 192.168.199.1)</div>
         <div class="item-good">REST API — 5 GET queries: hostname, version, interfaces, OSPF, NTP</div>
         <div class="item-good">JSON parsing — interface table, OSPF networks, NTP config from API responses</div>
         <div class="item-good">HTTP GET method — demonstrated across all 5 resource queries</div>
@@ -573,7 +582,7 @@
 
   <div class="gap-card">
     <div class="gap-title">3. ✓ Ansible/Netmiko automation — closed May 21, 2026 (completed differently)</div>
-    <div class="gap-body">Ansible project built in full (inventory, vault, playbook, cfg, cisco.ios collection). Playbook blocked at runtime by 3-layer SSH KEX incompatibility: IOS XE 16.10 legacy SHA-1 KEX, network_cli ignoring all ssh_args overrides (cisco.ios bug #1133), and ansible-pylibssh crashing on Apple Silicon. Solution: Netmiko backup script — connects to C1111, runs show running-config, saves timestamped output to backups/. The failure documented more real-world automation knowledge than a clean playbook run would have. Next: RESTCONF on C1111 for the REST API gap.</div>
+    <div class="gap-body">Ansible project built in full (inventory, vault, playbook, cfg, cisco.ios collection). Playbook blocked at runtime by 3-layer SSH KEX incompatibility: IOS XE 16.10 legacy SHA-1 KEX, network_cli ignoring all ssh_args overrides (cisco.ios bug #1133), and ansible-pylibssh crashing on Apple Silicon. Solution: Netmiko backup script — connects to both devices (C1111 at 192.168.199.1 via TRANSIT, 3560CX at 192.168.99.2 via MGMT SVI) using legacy KEX workarounds baked into ansible.cfg. Saves timestamped .txt files to ansible/backups/. Credentials via env vars. The failure documented more real-world automation knowledge than a clean playbook run would have.</div>
     <span class="tag tag-done">Closed</span>
     <span class="tag tag-add">Pulls Phase 7 forward</span>
   </div>
