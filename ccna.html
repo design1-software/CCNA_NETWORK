@@ -274,16 +274,23 @@
         <div class="item-good">5 SSIDs mapped to 5 VLANs on UniFi</div>
         <div class="item-good">WiFi 6 APs — WPA2/WPA3 capable</div>
         <div class="item-good">PoE+ 802.3af/at — live devices depend on it</div>
-        <div class="item-good">Rapid-PVST+ on JLM-LAB-SW1 — Extended system ID + Bridge Assurance configured</div>
+        <!-- 📘 STP root bridge priority set to 4096 on the 3560CX. Lower priority
+             wins the election — the default is 32768, so 4096 guarantees the
+             3560CX wins root bridge election for all VLANs once trunks are live.
+             Bridge Assurance protects against unidirectional link failures.
+             Extended system ID is required for PVST+ with multiple VLANs. -->
+        <div class="item-good">Rapid-PVST+ on JLM-LAB-SW1 — root priority 4096, Extended system ID, Bridge Assurance configured</div>
         <div class="item-good">STP loop prevention — no instances without redundant L2 paths (correct behavior)</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
-        <!-- 📘 One gap remains in Domain 2: EtherChannel.
-             The 3560CX cutover creates the physical opportunity — once
-             cabled with redundant uplinks, LACP or PAgP can bundle them.
-             That's both an EtherChannel lab and an STP topology change
-             in one step: add cables, watch instances appear. -->
+        <!-- 📘 PortFast + BPDU Guard belong on access ports.
+             PortFast skips the STP listening/learning states (30 seconds total)
+             so end devices get connectivity immediately on plug-in.
+             BPDU Guard shuts the port if it ever receives a BPDU — a switch
+             plugged into an access port would send BPDUs, which is a security
+             risk. Together they're the standard access-port STP safety net. -->
+        <div class="item-gap">PortFast + BPDU Guard — not yet configured on 3560CX access ports</div>
         <div class="item-gap">EtherChannel — redundant uplinks to 3560CX create this opportunity</div>
       </div>
     </div>
@@ -448,8 +455,14 @@
              checks its own username database — no external server needed.
              RADIUS/TACACS+ (external server) is Phase C with FreeRADIUS on
              Proxmox. The local framework is the CCNA-relevant piece. -->
-        <div class="item-good">AAA — aaa new-model, local auth + exec authorization, console + vty hardened</div>
-        <div class="item-good">login on-success log — successful logins recorded to syslog</div>
+        <!-- 📘 AAA configured on both devices — C1111 and 3560CX.
+             aaa new-model replaces line-level passwords globally. Local auth
+             means the device checks its own username database — no external
+             server needed for CCNA purposes. exec authorization controls
+             privilege level assignment from the local user database.
+             login on-success log writes an audit entry on every successful login. -->
+        <div class="item-good">AAA — aaa new-model on C1111 + 3560CX · local auth + exec authz · console + vty hardened</div>
+        <div class="item-good">login on-success log — audit trail on both devices</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>
