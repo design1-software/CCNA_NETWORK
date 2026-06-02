@@ -476,17 +476,17 @@
         <div class="item-good">REST API — 5 GET queries: hostname, version, interfaces, OSPF, NTP</div>
         <div class="item-good">JSON parsing — interface table, OSPF networks, NTP config from API responses</div>
         <div class="item-good">HTTP GET method — demonstrated across all 5 resource queries</div>
-        <!-- 📘 INFRASTRUCTURE UPDATE — May 27, 2026:
-             Proxmox VE 9.2 is live on a custom ATX server (Ryzen 9 7900X,
-             64GB DDR5, 2TB NVMe). This is the compute layer above the network —
-             the server that hosts VMs for every Phase C+ task.
-             Tailscale node 7: pve (100.71.239.21). Web UI: 192.168.100.10:8006.
-             vmstore = 1.8TB LVM-thin pool for VM disks.
-             Proxmox unblocks: FreeRADIUS (AAA accounting), Syslog server,
-             Wazuh SIEM, Ansible AWX, and any future lab VM workloads.
-             Provisioning VMs on Proxmox via Terraform or Ansible is the next
-             IaC layer — infrastructure automation in practice. -->
-        <div class="item-good">Proxmox VE 9.2 — custom server live, Tailscale node 7 (100.71.239.21), vmstore 1.8TB NVMe</div>
+        <!-- 📘 INFRASTRUCTURE UPDATE — June 2, 2026:
+             Proxmox VE 9.2 live. Custom ATX: Ryzen 9 7900X, 64GB DDR5, SAMA V40,
+             SL-650G PSU, PA120 SE cooler. vmstore = 1.8TB LVM-thin on SN770 NVMe.
+             Currently on VLAN 1 management (192.168.100.10). VLAN 70 is designed
+             and the 3560CX Gi0/4 port is already trunked and reserved — the
+             physical cable just isn't run yet. When the cable is pulled (Phase C),
+             management moves to VLAN 70 and the RTL8125 comes up as VM trunk.
+             Until then, Tailscale (pve 100.71.239.21) is the access path.
+             Proxmox unblocks: FreeRADIUS (AAA accounting — Phase C),
+             Syslog server (Phase C), Wazuh SIEM, AD VM, osTicket (Phase D). -->
+        <div class="item-good">Proxmox VE 9.2 — live on VLAN 1 · Tailscale pve (100.71.239.21) · 3560CX Gi0/4 reserved · VLAN 70 pending cable</div>
       </div>
       <div class="col">
         <div class="col-label" style="color:var(--amber)">Gaps to fill</div>

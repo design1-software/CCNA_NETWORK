@@ -53,16 +53,17 @@
       <!-- 📘 <strong> makes text bold and signals importance to screen readers.
            Use it for genuinely important phrases, not decoration.
            🔗 https://www.w3schools.com/tags/tag_strong.asp -->
-      <strong>Hardware:</strong> Ryzen 9 7900X (12c/24t) · 64GB DDR5-6000 · B650 motherboard<br>
-      <strong>Storage:</strong> Samsung 860 EVO (OS, /dev/sda) · WD Black SN770 2TB NVMe (vmstore LVM-thin, 1.8TB) · Samsung 860 EVO (backup vault, /mnt/backup, 458GB)<br>
-      <strong>NICs:</strong> Intel I225V (management, nic1, UP) · Realtek RTL8125 (future VM trunk, nic0)<br>
-      <strong>Network:</strong> Management IP 192.168.100.10 · Web UI :8006 · VLAN 70 (192.168.70.0/24) pending Phase C cabling<br>
-      <strong>Remote access:</strong> Tailscale node 7 — pve (100.71.239.21) · reachable from any node on the tailnet<br>
-      <strong>Thermals at idle:</strong> CPU 39.8°C · NVMe 31.9°C · PPT 42W (cap: 88W)<br><br>
-      This is the compute layer above the network. Every Phase C+ task runs here: FreeRADIUS (AAA accounting),
-      Syslog server, Wazuh SIEM, Ansible AWX, and any future lab VM workload.
+      <strong>Hardware:</strong> AMD Ryzen 9 7900X (12c/24t) · 64GB DDR5-6000 · B650 motherboard · SAMA V40 chassis · SL-650G PSU · PA120 SE cooler<br>
+      <strong>Storage:</strong> Samsung 860 EVO (OS, /dev/sda) · WD Black SN770 2TB NVMe (vmstore LVM-thin, 1.8TB) · Samsung 860 EVO (backup vault, 458GB)<br>
+      <strong>NICs:</strong> Intel I225V (management, nic1) · Realtek RTL8125 (future VM trunk, nic0)<br>
+      <strong>Network — current:</strong> VLAN 1 management at 192.168.100.10 · Web UI :8006 · Tailscale node 7 — pve (100.71.239.21)<br>
+      <strong>Network — pending:</strong> 3560CX Gi0/4 trunked and reserved · physical cable not yet run · VLAN 70 (192.168.70.0/24) static IP and VM trunk on RTL8125 activate when cable is pulled (Phase C)<br>
+      <strong>Thermals at idle:</strong> CPU 39.8°C · NVMe 31.9°C · PPT 42W (BIOS cap: 88W)<br><br>
+      This is the compute layer above the network. Phase C workloads: FreeRADIUS (AAA accounting), Syslog server,
+      Ansible AWX. Phase D workloads: Wazuh SIEM, Active Directory VM, osTicket, M365 sandbox.
       The LVM-thin pool means VM disk space is allocated on-demand — a 100GB VM doesn't consume
-      100GB until it actually writes data.
+      100GB until it actually writes data. Tailscale is the current access path; it doesn't depend
+      on the local VLAN path that isn't cabled yet.
     </div>
     <!-- 📘 Multiple tags on one card — class stacking. Each .tag gets base tag
          styles; .tag-done adds green. Two tags = two classes, no extra HTML needed.
